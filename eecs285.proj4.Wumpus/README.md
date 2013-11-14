@@ -1,3 +1,3 @@
 Team Wumpus Project
 
-*for* EECS 285 Project 4
+#For EECS 285 Project 4
