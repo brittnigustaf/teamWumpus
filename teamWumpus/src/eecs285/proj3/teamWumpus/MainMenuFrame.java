@@ -1,24 +1,31 @@
 package eecs285.proj3.teamWumpus;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class MainMenuFrame extends JFrame {
 
-    JPanel pane;
+
     JButton playButton;
     JButton helpButton;
     JButton quitButton;
+    JLabel titleImage;
+    
+    static BorderLayout mainLayout = new BorderLayout();
+    static BorderLayout buttonLayout = new BorderLayout();
+    static FlowLayout northLayout = new FlowLayout();
+    static FlowLayout centerLayout = new FlowLayout();
+
+    JPanel pane = new JPanel(mainLayout);
+    JPanel buttonPane = new JPanel(buttonLayout);
+    JPanel centerPane = new JPanel(centerLayout); //buttons and image
+    JPanel northPane = new JPanel(northLayout);
+    
+    HelpWindow helpWindow = new HelpWindow();
+
+
     
     public MainMenuFrame() {
         super("Hunt The Wumpus!");
@@ -33,21 +40,17 @@ public class MainMenuFrame extends JFrame {
         
         
         //set up the layouts
-        BorderLayout mainLayout = new BorderLayout();
-        //FlowLayout northLayout = new FlowLayout();
-        BorderLayout centerLayout = new BorderLayout();
+
         //FlowLayout southLayout = new FlowLayout();
         
         //put layouts into their panes
         //JPanel northPane = new JPanel(northLayout);
-        JPanel centerPane = new JPanel(centerLayout);
         //JPanel southPane = new JPanel(southLayout);
-        pane = new JPanel(mainLayout);
         
         //size the window
         setBounds(0,0,1000,800);
         
-        //make it so I don't actually close on "x"
+        //close on "x"
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // inherit main frame
@@ -57,9 +60,10 @@ public class MainMenuFrame extends JFrame {
         con.add(pane); 
         
         //Configure my components
-        playButton.setMaximumSize(new Dimension(300,150));
-        helpButton.setMaximumSize(new Dimension(300,150));
-        quitButton.setMaximumSize(new Dimension(300,150));
+        playButton.setPreferredSize(new Dimension(200,50));
+        helpButton.setPreferredSize(new Dimension(200,50));
+        quitButton.setPreferredSize(new Dimension(200,50));
+        
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 play();
@@ -79,20 +83,32 @@ public class MainMenuFrame extends JFrame {
 
         
         //add components to their proper panes
-        centerPane.add(playButton, BorderLayout.NORTH);
-        centerPane.add(helpButton, BorderLayout.CENTER);
-        centerPane.add(quitButton, BorderLayout.SOUTH);
+        buttonPane.add(playButton, BorderLayout.NORTH);
+        buttonPane.add(helpButton, BorderLayout.CENTER);
+        buttonPane.add(quitButton, BorderLayout.SOUTH);
+        
+        buttonLayout.setVgap(25);
+        centerLayout.setVgap(150);
+        
+        ImageIcon wumpusIcon = new ImageIcon("C:/Users/Luke/git/teamWumpus/eecs285.proj4.Wumpus/wumpus.jpg");
+        
+        //titleImage.setIcon(wumpusIcon);
 
-
-
-
+         
+        centerPane.add(buttonPane);
+        //northPane.add(titleImage);
         pane.add(centerPane, BorderLayout.CENTER);
         
         setVisible(true); // display this frame
     }
-    private void help(){};
+    private void help(){
+        helpWindow.setVisible(true);
+    };
     
-    private void play(){};
+    private void play(){
+        new GameWindow();
+        setVisible(false);
+    };
 
     
 }

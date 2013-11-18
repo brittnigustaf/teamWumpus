@@ -1,5 +1,3 @@
-
-
 package eecs285.proj3.teamWumpus;
 
 import java.awt.Container;
