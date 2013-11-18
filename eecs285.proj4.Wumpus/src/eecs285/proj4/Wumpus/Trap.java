@@ -1,4 +1,4 @@
-package eecs285.proj4.wumpus;
+package eecs285.proj4.Wumpus;
 
 /** Purpose: abstract class for trap.
  * Allows people to impliment many different types of traps like

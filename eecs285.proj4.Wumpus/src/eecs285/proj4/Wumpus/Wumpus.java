@@ -1,4 +1,4 @@
-package eecs285.proj4.wumpus;
+package eecs285.proj4.Wumpus;
 
 /** Purpose: This is the Wumpus class
  * currently it only sits around

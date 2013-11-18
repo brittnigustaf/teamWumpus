@@ -1,4 +1,4 @@
-package eecs285.proj4.wumpus;
+package eecs285.proj4.Wumpus;
 
 public class Directions {
   //member variables
