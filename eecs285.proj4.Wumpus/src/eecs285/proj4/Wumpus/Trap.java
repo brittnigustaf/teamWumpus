@@ -21,12 +21,5 @@ abstract class Trap {
     location = inRoom;
     location.add(this);
   }
-  
-  void add(Room inRoom, String direction){
-    //EFF: changes the location for the trap
-    //MOD: location
-    
-    location = inRoom;
-  }
 
 }
