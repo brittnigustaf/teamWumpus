@@ -1,4 +1,4 @@
-package eecs285.proj4.Wumpus;
+package eecs285.proj4.wumpus;
 
 import java.awt.*;
 
