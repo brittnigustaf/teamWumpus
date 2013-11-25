@@ -4,9 +4,8 @@ import java.awt.Container;
 
 import javax.swing.*;
 
-import javax.swing.JFrame;
 
-
+@SuppressWarnings("serial")
 public class BaseFrame extends JFrame {
     
     JPanel pane = new JPanel();

@@ -2,8 +2,10 @@ package eecs285.proj4.wumpus;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class HelpWindow extends JFrame {
     
    

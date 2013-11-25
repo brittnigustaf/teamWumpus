@@ -4,7 +4,11 @@ import java.awt.*;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class GameWindow extends JFrame {
+    
+    Player curPlayer;
+    Player players[];
     
 	Room curRoom = new Room();
   
@@ -18,6 +22,7 @@ public class GameWindow extends JFrame {
     ImageIcon smell = new ImageIcon();
     ImageIcon gold = new ImageIcon();
     ImageIcon wind = new ImageIcon();
+    ImageIcon bats = new ImageIcon();
 
     
     BorderLayout mainLayout = new BorderLayout();
@@ -33,17 +38,19 @@ public class GameWindow extends JFrame {
     JPanel pane = new JPanel(mainLayout);
     
     GameWindow(){
+        //default 8x8, 1-player game
     	super("Hunt The Wumpus!");
         mapLayout = new GridLayout(8,8);
         roomMap = new Room[8][8];
-        
+        players = new Player[1];
         initialize();
     }
-    GameWindow(int x, int y){
+    GameWindow(int x, int y, int numPlayers){
+        //lets you make variable size rooms
     	super("Hunt The Wumpus!");
-        mapLayout = new GridLayout(8,8);
-        roomMap = new Room[8][8];
-
+        mapLayout = new GridLayout(x,y);
+        roomMap = new Room[x][y];
+        players = new Player[numPlayers];
         initialize();
     }
     
@@ -59,7 +66,7 @@ public class GameWindow extends JFrame {
         // inherit main frame
         Container con = this.getContentPane();
         
-        //fill gamePane with roomIcons
+        //fill gamePane with roomIcons and find starting player position
         gamePane.setBounds(0, 0, 800, 600);
         gamePane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
@@ -78,11 +85,30 @@ public class GameWindow extends JFrame {
         pane.add(infoPane, BorderLayout.SOUTH);
         pane.add(optionPane, BorderLayout.EAST);
         
+        //setup player Info
+        for(Player player : players){
+            
+        }
+        
+        curPlayer = players[0];
+        
         // add the panel to frame
         con.add(pane);
         setVisible(true);
         
     }
     
+    void move(Directions dir){
+        
+    }
+    
+    void fire(Directions dir){
+        
+    }
+    
+    void step(){
+        //is called after every action to update the game state
+        
+    }
 
 }
