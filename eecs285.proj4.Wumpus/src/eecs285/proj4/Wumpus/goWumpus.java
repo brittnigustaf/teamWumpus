@@ -1,4 +1,4 @@
-package eecs285.proj3.teamWumpus;
+package eecs285.proj4.Wumpus;
 
 import java.io.File;
 import java.io.FileFilter;
