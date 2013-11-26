@@ -54,15 +54,52 @@ public class Room {
     return trap.callHint();
   }
   
-  void hintAtPlayer(){
-    //EFF: prints out hint to player
+  ToggleBox<String> hintAtPlayer(){
+    //EFF: returns a string ToggleBox with the hints from the room
     //     The problem is I don't know how the player will recieve this yet.
     
     Room knockknock;
+    String events[] = new String[4];
+    boolean mesh[] = new boolean[4];
+    for(int i=0; i<4;i++) mesh[i] = true;
+    
     for (int i=0; i<4; i++){
       knockknock = doors[i];
-      if(knockknock != null) System.out.println(knockknock.revealTrap());
+      if(knockknock != null) events[i] = doors[i].revealTrap();
+      else {
+        events[i] = "";
+        mesh[i] = false;
+      }
     }
+    
+    //compare index 0 to all
+    if(events[0].equals(events[1])){
+      mesh[0] = false;
+    }
+    if(events[0].equals(events[2])){
+      mesh[0] = false;
+    }
+    if(events[0].equals(events[3])){
+      mesh[0] = false;
+    }
+    
+    //compares index 1 to 2 and 3
+    if(events[1].equals(events[2])){
+      mesh[1] = false;
+    }
+    if(events[1].equals(events[3])){
+      mesh[1] = false;
+    }
+    
+    //compare index 2 to 3
+    if(events[2].equals(events[3])){
+      mesh[2] = false;
+    }
+    
+    ToggleBox<String> eventCall = new ToggleBox<String> (events, mesh);
+    
+    return eventCall;
+    
   }
   
   
