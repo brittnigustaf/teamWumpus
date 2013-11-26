@@ -17,7 +17,7 @@ public class Directions {
   }
   
   int orient(String dir){
-    //EFF: returns the interger associated with the cardianl direction
+    //EFF: returns the integer associated with the cardinal direction
     //REQ: to be a cardinal direction
     
     dir = dir.toUpperCase();
