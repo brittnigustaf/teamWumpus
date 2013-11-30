@@ -2,7 +2,6 @@ package eecs285.proj4.wumpus;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
@@ -41,8 +40,8 @@ public class MapMaker {
         boolean wumpusStart = false;
     }
     
-    public static int main(String [] args){
-        Scanner scanner = new Scanner (System.in);
+    public String makeMap(int x, int y, int numPits, int numBats){
+       /* Scanner scanner = new Scanner (System.in);
         System.out.println(
         		"Please input the dimensions of the map in the form: X Y");
         String input = scanner.next(); // Get what the user types.
@@ -79,30 +78,38 @@ public class MapMaker {
             y = Integer.parseInt(dimensions[1]);
         }catch(Exception e){
             return -1;
-        }
+        }*/
         int size = x * y;
         if(size <= 0){
-            return -1;
+            return "error :(";
         }
         String[][] map = new String[x][y];
         littleRoom[][] rooms = new littleRoom[x][y];
+        for(int i = 0; i < x; i++){
+        	for(int j = 0; j < y; j++){
+        		map[i][j] = "";
+        		rooms[i][j] = new littleRoom();
+        	}
+        }
 
         
         Random rando = new Random();
         
-        int start1 = rando.nextInt() % size;
+        int start1 = rando.nextInt(Integer.MAX_VALUE) % size;
         
         int start1x = start1 / x;
         int start1y = start1 % x;
         
         map[start1x][start1y] += "1"; // set that square to be the 
         							  //starting square for P1
+        System.out.println(start1x + "," + start1y);
+        
         rooms[start1x][start1y].P1Start = true;
 
         
         int start2;
         do{ //make sure start2 and start1 aren't the same square;
-            start2 = rando.nextInt() % size;
+            start2 = rando.nextInt(Integer.MAX_VALUE) % size;
         }
         while(start2 == start1);
         
@@ -115,7 +122,7 @@ public class MapMaker {
      
         int wumpusSquare;
         do{ //make sure start2 and start1 aren't the same square;
-            wumpusSquare = rando.nextInt() % size;
+            wumpusSquare = rando.nextInt(Integer.MAX_VALUE) % size;
         }
         while(wumpusSquare == start2 || wumpusSquare == start1);
         
@@ -131,7 +138,7 @@ public class MapMaker {
         int numFound = 0;
         for(int i = 0; i < numBats; i++){
 	        do{ //make sure start2 and start1 aren't the same square;
-	            batSquares[numFound] = rando.nextInt() % size;
+	            batSquares[numFound] = rando.nextInt(Integer.MAX_VALUE) % size;
 	        }
 	        while(batSquares[numFound] == start1 || 
 	        		batSquares[numFound] == start2);
@@ -149,7 +156,7 @@ public class MapMaker {
         numFound = 0;
         for(int i = 0; i < numPits; i++){
 	        do{ //make sure start2 and start1 aren't the same square;
-	            pitSquares[numFound] = rando.nextInt() % size;
+	            pitSquares[numFound] = rando.nextInt(Integer.MAX_VALUE) % size;
 	        }
 	        while(pitSquares[numFound] == start1 ||
 	        		pitSquares[numFound] == start2);
@@ -163,12 +170,17 @@ public class MapMaker {
 	        rooms[pitx][pity].isPit = true;
         }
         
-        String[][] mapAttempt;
-        littleRoom[][] roomAttempt;
+        String[][] mapAttempt = new String[map.length][];
+        littleRoom[][] roomAttempt = new littleRoom[map.length][];
         do{
-            mapAttempt = map.clone();
-            roomAttempt = rooms.clone();
+            for(int i = 0; i < map.length; i++){
+            	mapAttempt[i] = map[i].clone();
+                roomAttempt[i] = rooms[i].clone();
+
+            }
             generateMap(mapAttempt,roomAttempt);
+            //printMap(mapAttempt, roomAttempt);
+            //break;
         }
         while(!isPath(mapAttempt, roomAttempt));
         
@@ -176,14 +188,20 @@ public class MapMaker {
         rooms = roomAttempt;
         
         printMap(map,rooms);
-        
-        return 0;
-        
+        String out= "";
+        for(String[] row: map){
+        	for(String room: row){
+        		out += room;
+        	}
+        	out+='\n';
+        }
+       return out; 
     }
 
     private static void printMap(String[][] map, littleRoom[][] rooms) {
     	//prints out a map of wumpus rooms.
-		System.out.println("----------------------------------------------------");
+		System.out.println("room00 = " + map[0][0]);
+    	System.out.println("----------------------------------------------------");
     	for(String[] row: map){
     		String line = "|";
     		for(String room: row){
@@ -276,11 +294,17 @@ public class MapMaker {
     					requires.add(Direction.RIGHT);
     					roomOptions.retainAll(right);
     				}
+    				else{
+    					roomOptions.removeAll(right);
+    				}
     			}
     			if(i+1 < x && rooms[i+1][j].type != roomTypes.EMPTY){
     				if(rooms[i+1][j].canGo.contains(Direction.UP) ){
     					requires.add(Direction.DOWN);
     					roomOptions.retainAll(down);
+    				}
+    				else{
+    					roomOptions.removeAll(down);
     				}
     			}
     			if(j-1 >= 0 && rooms[i][j-1].type != roomTypes.EMPTY){
@@ -288,20 +312,36 @@ public class MapMaker {
     					requires.add(Direction.LEFT);
     					roomOptions.retainAll(left);
     				}
+    				else{
+    					roomOptions.removeAll(left);
+    				}
+    			}
+    			else if(j-1 >= 0 && rooms[i][j-1].type == roomTypes.EMPTY){
+    				roomOptions.removeAll(left);
     			}
     			if(i -1 >= 0 && rooms[i-1][j].type != roomTypes.EMPTY){
     				if(rooms[i-1][j].canGo.contains(Direction.DOWN) ){
     					requires.add(Direction.UP);
     					roomOptions.retainAll(up);
     				}
+    				else{
+    					roomOptions.removeAll(up);
+    				}
     			}
-    			
+    			else if(i-1 >=0 && rooms[i-1][j].type == roomTypes.EMPTY){
+    				roomOptions.removeAll(up);
+    			}
     			
     			//finally, pick one of the remaining options
     			//at random and assign it
-    			
-    			Random rando = new Random();
-    			int pick = rando.nextInt()%roomOptions.size();
+    			int pick;
+    			if(roomOptions.size() == 0){
+    				return;
+    			}
+    			else{
+	    			Random rando = new Random();
+	    			pick = rando.nextInt(Integer.MAX_VALUE) % roomOptions.size();
+    			}
     			
     			roomTypes room_type = (roomTypes) roomOptions.toArray()[pick];
     			rooms[i][j].type = room_type;
@@ -375,9 +415,6 @@ public class MapMaker {
     			
     					
     			}
-    			
-    			
-    			
     		}
     	}
     }
@@ -388,10 +425,14 @@ public class MapMaker {
         int p1Loc = -1;
         int p2Loc = -1;
         int wumpusLoc = -1;
+        int p1x = -1;
+    	int p1y = -1;
         for(int i = 0; i < x; i++){
             for(int j = 0; j < y; j++){
                 if (map[i][j].contains("1"))
                     p1Loc = i*y + j;
+                	p1x = i;
+                	p1y = j;
                 if(map[i][j].contains("2"))
                     p2Loc = i*y + j;
                 if(map[i][j].contains("W"))
@@ -401,7 +442,13 @@ public class MapMaker {
         
         Queue <Integer> toVisit = new ArrayDeque<Integer>();
         Boolean[][] haveVisited = new Boolean[x][y];
+        for(int i = 0; i < x; i++){
+        	for(int j = 0; j < y; j++){
+        		haveVisited[i][j] = false;
+        	}
+        }
         
+        haveVisited[p1x][p1y] = true;
         toVisit.add(p1Loc);
         
         while(toVisit.size() > 0){
@@ -565,17 +612,14 @@ public class MapMaker {
         				&& !currentRoom.isBat && !currentRoom.isPit){
         			if(!haveVisited[i][j]){
         				isGood = false;
-        				System.out.println(
-        						"Did not visit room [" + x + "][" + y +"]");
+        				//System.out.println(
+        				//		"Did not visit room [" + i + "][" + j +"]");
         			}
         		}
         				
         	}
         }
-        if(isGood)
-        	return true;
-        else
-        	return false;
+        return isGood;
     }
 
 }
