@@ -10,8 +10,8 @@ public class Codex {
     String DOWN_RIGHT;
     String DOWN_LEFT;
     String LEFT_RIGHT;
-    String T_Right;
-    String T_Left;
+    String T_RIGHT;
+    String T_LEFT;
     String T_UP;
     String T_DOWN;
     String EMPTY;
@@ -19,6 +19,8 @@ public class Codex {
     String BATS;
     String WUMPUS;
     String GOLD;
+    String PLAYER1;
+    String PLAYER2;
     
     Codex(){
       CROSS = "A"; 
@@ -28,14 +30,16 @@ public class Codex {
       DOWN_RIGHT = "E";
       DOWN_LEFT = "F";
       LEFT_RIGHT = "G";
-      T_Right = "H";
-      T_Left = "I";
+      T_RIGHT = "H";
+      T_LEFT = "I";
       T_UP = "J";
       T_DOWN = "K";
       EMPTY = "L";
       PITFALL = "P";
-      BATS = "T";
+      BATS = "b";
       WUMPUS = "W";
       GOLD = "O";
+      PLAYER1 = "1";
+      PLAYER2="2";
     }
 }

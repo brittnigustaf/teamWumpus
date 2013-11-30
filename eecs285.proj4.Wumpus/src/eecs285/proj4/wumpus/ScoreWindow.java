@@ -11,10 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/*import org.apache.http.*;
+import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.*;*/
+import org.apache.http.impl.client.*;
 
 @SuppressWarnings("serial")
 public class ScoreWindow extends JFrame {
