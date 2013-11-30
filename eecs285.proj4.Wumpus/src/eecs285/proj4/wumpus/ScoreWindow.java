@@ -11,10 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.apache.http.*;
+/*import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.*;
+import org.apache.http.impl.client.*;*/
 
 @SuppressWarnings("serial")
 public class ScoreWindow extends JFrame {
@@ -66,7 +66,7 @@ public class ScoreWindow extends JFrame {
     }
     
     public Object getScores(){
-        try {  
+      /*  try {  
           HttpClient httpclient = new DefaultHttpClient();  
           HttpResponse response = httpclient.execute(new HttpGet(url)); 
     
@@ -75,7 +75,7 @@ public class ScoreWindow extends JFrame {
           System.out.println("[GET REQUEST]\tNetwork exception\t" +  e);  
         }  
     
-    
+    */
     String response = content.toString();
     
     return response;
