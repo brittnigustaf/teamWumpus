@@ -179,7 +179,8 @@ public class MapMaker {
 
             }
             generateMap(mapAttempt,roomAttempt);
-            //printMap(mapAttempt, roomAttempt);
+            printMap(mapAttempt, roomAttempt);
+            //isPath(mapAttempt, roomAttempt);
             //break;
         }
         while(!isPath(mapAttempt, roomAttempt));
@@ -200,7 +201,6 @@ public class MapMaker {
 
     private static void printMap(String[][] map, littleRoom[][] rooms) {
     	//prints out a map of wumpus rooms.
-		System.out.println("room00 = " + map[0][0]);
     	System.out.println("----------------------------------------------------");
     	for(String[] row: map){
     		String line = "|";
@@ -455,9 +455,9 @@ public class MapMaker {
             Integer curRoom = toVisit.remove();
             Integer curX = curRoom / x;
             Integer curY = curRoom % x;
+            System.out.println("At:" + curX + "," + curY);
             littleRoom currentRoom = rooms[curX][curY];
-            if(!haveVisited[curX][curY] && 
-            		!currentRoom.isPit && !currentRoom.isBat){
+            if(	!currentRoom.isPit && !currentRoom.isBat){
             	switch (currentRoom.type){ //add appropriate things to queue
 	                case CROSS:
 	                	if(curX + 1 < x && !haveVisited[curX+1][curY]){ //add down
