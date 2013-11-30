@@ -122,6 +122,7 @@ public class MapMaker {
         int wumpusx = wumpusSquare / x;
         int wumpusy = wumpusSquare % x;
         
+        map[wumpusx][wumpusy] += "O";
         map[wumpusx][wumpusy] += "W"; // set that square to be the 
         							  //starting square for the wumpus
         rooms[wumpusx][wumpusy].wumpusStart = true;
@@ -158,14 +159,21 @@ public class MapMaker {
 	        
 	        numFound++;
 	        
-	        map[pitx][pity] += "b"; // set that square to have a pit
+	        map[pitx][pity] += "P"; // set that square to have a pit
 	        rooms[pitx][pity].isPit = true;
         }
         
-        
-        while(!isPath(map, rooms)){
-            generateMap(map,rooms);
+        String[][] mapAttempt;
+        littleRoom[][] roomAttempt;
+        do{
+            mapAttempt = map.clone();
+            roomAttempt = rooms.clone();
+            generateMap(mapAttempt,roomAttempt);
         }
+        while(!isPath(mapAttempt, roomAttempt));
+        
+        map = mapAttempt;
+        rooms = roomAttempt;
         
         printMap(map,rooms);
         
@@ -291,6 +299,85 @@ public class MapMaker {
     			
     			//finally, pick one of the remaining options
     			//at random and assign it
+    			
+    			Random rando = new Random();
+    			int pick = rando.nextInt()%roomOptions.size();
+    			
+    			roomTypes room_type = (roomTypes) roomOptions.toArray()[pick];
+    			rooms[i][j].type = room_type;
+    			switch(room_type){
+    			case CROSS:
+    				map[i][j] += "A";
+        			rooms[i][j].canGo.add(Direction.UP);
+        			rooms[i][j].canGo.add(Direction.DOWN);
+        			rooms[i][j].canGo.add(Direction.LEFT);
+        			rooms[i][j].canGo.add(Direction.RIGHT);
+    				break;
+    			case UP_RIGHT:
+    				map[i][j] += "B";
+        			rooms[i][j].canGo.add(Direction.UP);
+        			rooms[i][j].canGo.add(Direction.RIGHT);
+    				break;
+    			case UP_LEFT:
+    				map[i][j] += "C";
+        			rooms[i][j].canGo.add(Direction.UP);
+        			rooms[i][j].canGo.add(Direction.LEFT);
+    				break;
+    			case UP_DOWN:
+    				map[i][j] += "D";
+        			rooms[i][j].canGo.add(Direction.UP);
+        			rooms[i][j].canGo.add(Direction.DOWN);
+    				break;
+    			case DOWN_RIGHT:
+    				map[i][j] += "E";
+        			rooms[i][j].canGo.add(Direction.DOWN);
+        			rooms[i][j].canGo.add(Direction.RIGHT);
+    				break;
+    			case DOWN_LEFT:
+    				map[i][j] += "F";
+        			rooms[i][j].canGo.add(Direction.DOWN);
+        			rooms[i][j].canGo.add(Direction.LEFT);
+    				break;
+    			case LEFT_RIGHT:
+    				map[i][j] += "G";
+        			rooms[i][j].canGo.add(Direction.LEFT);
+        			rooms[i][j].canGo.add(Direction.RIGHT);
+    				break;
+    			case T_RIGHT:
+    				map[i][j] += "H";
+        			rooms[i][j].canGo.add(Direction.UP);
+        			rooms[i][j].canGo.add(Direction.DOWN);
+        			rooms[i][j].canGo.add(Direction.RIGHT);
+    				break;
+    			case T_LEFT:
+    				map[i][j] += "I";
+        			rooms[i][j].canGo.add(Direction.UP);
+        			rooms[i][j].canGo.add(Direction.DOWN);
+        			rooms[i][j].canGo.add(Direction.LEFT);
+    				break;
+    			case T_UP:
+    				map[i][j] += "J";
+        			rooms[i][j].canGo.add(Direction.UP);
+        			rooms[i][j].canGo.add(Direction.LEFT);
+        			rooms[i][j].canGo.add(Direction.RIGHT);
+    				break;
+    			case T_DOWN:
+    				map[i][j] += "K";
+        			rooms[i][j].canGo.add(Direction.DOWN);
+        			rooms[i][j].canGo.add(Direction.LEFT);
+        			rooms[i][j].canGo.add(Direction.RIGHT);
+				break;
+    			case EMPTY:
+    				map[i][j] += "L";
+    				break;
+    			default:
+    				break;
+    			
+    					
+    			}
+    			
+    			
+    			
     		}
     	}
     }
