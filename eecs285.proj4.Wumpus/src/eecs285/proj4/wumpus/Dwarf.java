@@ -154,7 +154,17 @@ public class Dwarf {
 				dungeon[cor[0]][cor[1]].add(new Pitfall(dungeon[cor[0]][cor[1]]));
 			}
 			  
+			if(plans[i].equals(codex.BATS)){
+				dungeon[cor[0]][cor[1]].add(new Bats(dungeon[cor[0]][cor[1]]));
+			}
 			  
+			if(plans[i].equals(codex.WUMPUS)){
+				dungeon[cor[0]][cor[1]].add(new Wumpus(dungeon[cor[0]][cor[1]]));
+			}
+			
+			if(plans[i].equals(codex.GOLD)){
+				dungeon[cor[0]][cor[1]].add(new Gold(dungeon[cor[0]][cor[1]]));
+			}
 			  
 		  }
 	  }
