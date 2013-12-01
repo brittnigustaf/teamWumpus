@@ -25,8 +25,11 @@ public class Player
 	private int facingDir;
 	private Point location;
 	
+	//for telling where the player is
+	int coordinate[];
 	
-	public Player ()
+	
+	public Player (int x, int y)
 	{
 		//add player images
 	  /*
@@ -39,7 +42,12 @@ public class Player
 	  fireLeft = 
 	  fireRight = 
 	  */
-	  
+	 
+		coordinate = new int[2];
+		coordinate[0] = x;
+		coordinate[1] = y;
+	
+	
 	  curImage = moveUp;
 		arrow = true;
 		fireMode = false;
