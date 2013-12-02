@@ -8,6 +8,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -73,6 +75,9 @@ public class GameWindow extends JFrame {
     JButton changeMode;
     
     Border blackBorder;
+    
+    private ButtonListener actionListener;
+    private int moveDir;
     
     GameWindow(ScoreWindow inScore)
     {
@@ -221,6 +226,13 @@ public class GameWindow extends JFrame {
         dirPanel.add(new JLabel());
         dirPanel.add(southButton);
         dirPanel.add(new JLabel());
+        
+        actionListener = new ButtonListener();
+        northButton.addActionListener(actionListener);
+        westButton.addActionListener(actionListener);
+        eastButton.addActionListener(actionListener);
+        southButton.addActionListener(actionListener);
+        //e.addActionListener(actionListener);
 
         //Add direction panel titled border
         dirPanTitle = BorderFactory.createTitledBorder("Move Directions");
@@ -342,6 +354,22 @@ public class GameWindow extends JFrame {
         		}
     		}
     	}
+    }
+    
+    public class ButtonListener implements ActionListener
+    {
+      public void actionPerformed(ActionEvent event)
+      {
+        ImageList images = new ImageList();
+        if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.northArrow)
+          curPlayer.move(0, curPlayer.curRoom.move("north"), curPlayer.curRoom.move("north").panel.getLocation());
+        else if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.eastArrow)
+          curPlayer.move(1, curPlayer.curRoom.move("east"), curPlayer.curRoom.move("east").panel.getLocation());
+        else if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.southArrow)
+          curPlayer.move(2, curPlayer.curRoom.move("south"), curPlayer.curRoom.move("south").panel.getLocation());
+        else if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.westArrow)
+          curPlayer.move(3, curPlayer.curRoom.move("west"), curPlayer.curRoom.move("west").panel.getLocation());
+      }
     }
 
 }
