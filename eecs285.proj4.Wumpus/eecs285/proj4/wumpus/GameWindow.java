@@ -81,6 +81,8 @@ public class GameWindow extends JFrame {
       super("Hunt The Wumpus!");
       
       players = new Player[1];
+      players[0] = new Player();
+      //players[1] = new Player();
       
       Dwarf Urist = new Dwarf(players);
       rowNum = Urist.row;

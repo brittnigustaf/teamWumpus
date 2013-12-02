@@ -109,7 +109,7 @@ public class MainMenuFrame extends JFrame {
         centerLayout.setVgap(150);
         ImageIcon wumpusIcon = null;
         try{        
-            wumpusIcon = new ImageIcon(getClass().getResource("images/wumpus.jpg"));
+            wumpusIcon = new ImageIcon(getClass().getResource("wumpus.jpg"));
             titleImage.setIcon(wumpusIcon);
         }catch(Exception e){
             System.out.println("can't find image: " + e);

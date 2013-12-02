@@ -103,9 +103,11 @@ public class Dwarf {
       //EFF: designs the room based on the plans
       for(int i=0; i<plans.length;i++){
       Codex codex = new Codex();
-        
+      
+      ImageList images = new ImageList();
+      
       if(plans[i].equals(codex.CROSS)){
-        dungeon[cor[0]][cor[1]].add(ImageList.CROSS);
+        dungeon[cor[0]][cor[1]].add(images.CROSS);
         connect(cor, "north");
         connect(cor, "east");
         connect(cor, "south");
@@ -113,64 +115,66 @@ public class Dwarf {
       }
       
       if(plans[i].equals(codex.UP_RIGHT)){
-        dungeon[cor[0]][cor[1]].add(ImageList.UP_RIGHT);
+        dungeon[cor[0]][cor[1]].add(images.UP_RIGHT);
         connect(cor, "north");
         connect(cor, "east");
       }
       
       if(plans[i].equals(codex.UP_LEFT)){
-        dungeon[cor[0]][cor[1]].add(ImageList.UP_LEFT);
+        dungeon[cor[0]][cor[1]].add(images.UP_LEFT);
         connect(cor, "north");
         connect(cor, "west");
       }
       
       if(plans[i].equals(codex.UP_DOWN)){
-        dungeon[cor[0]][cor[1]].add(ImageList.UP_DOWN);
+        dungeon[cor[0]][cor[1]].add(images.UP_DOWN);
         connect(cor, "north");
         connect(cor, "south");
       }
       
       if(plans[i].equals(codex.DOWN_RIGHT)){
-        dungeon[cor[0]][cor[1]].add(ImageList.DOWN_RIGHT);
+    	  System.out.println(cor[0] + " " + cor[1]);
+
+        dungeon[cor[0]][cor[1]].add(images.DOWN_RIGHT);
         connect(cor, "south");
         connect(cor, "east");
       }
       
       if(plans[i].equals(codex.DOWN_LEFT)){
-        dungeon[cor[0]][cor[1]].add(ImageList.DOWN_RIGHT);
+        dungeon[cor[0]][cor[1]].add(images.DOWN_RIGHT);
         connect(cor, "south");
         connect(cor, "west");
       }
       
       if(plans[i].equals(codex.LEFT_RIGHT)){
-        dungeon[cor[0]][cor[1]].add(ImageList.LEFT_RIGHT);
+        dungeon[cor[0]][cor[1]].add(images.LEFT_RIGHT);
         connect(cor, "west");
         connect(cor, "east");
       }
       
       if(plans[i].equals(codex.T_RIGHT)){
-        dungeon[cor[0]][cor[1]].add(ImageList.T_RIGHT);
+        dungeon[cor[0]][cor[1]].add(images.T_RIGHT);
         connect(cor, "north");
         connect(cor, "east");
         connect(cor, "south");
       }
       
       if(plans[i].equals(codex.T_LEFT)){
-        dungeon[cor[0]][cor[1]].add(ImageList.T_LEFT);
+        dungeon[cor[0]][cor[1]].add(images.T_LEFT);
         connect(cor, "north");
         connect(cor, "west");
         connect(cor, "south");
       }
       
       if(plans[i].equals(codex.T_UP)){
-        dungeon[cor[0]][cor[1]].add(ImageList.T_UP);
+        dungeon[cor[0]][cor[1]].add(images.T_UP);
         connect(cor, "north");
         connect(cor, "west");
         connect(cor, "east");
       }
       
       if(plans[i].equals(codex.T_DOWN)){
-        dungeon[cor[0]][cor[1]].add(ImageList.T_DOWN);
+        dungeon[cor[0]][cor[1]].add(images.T_DOWN);
         connect(cor, "south");
         connect(cor, "west");
         connect(cor, "east");
@@ -232,7 +236,7 @@ public class Dwarf {
       int cor[] = new int[2];
       
       int newRow = i/col;
-      int newCol = i%col -1;
+      int newCol = i%col;
       
       cor[0] = newRow;
       cor[1] = newCol;
