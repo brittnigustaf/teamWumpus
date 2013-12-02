@@ -9,7 +9,5 @@ public class Bats extends Trap{
 	String callHint() {
 		return "You hear soft fluttering";
 	}
-	
-	
 
 }

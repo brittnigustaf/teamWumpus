@@ -16,6 +16,7 @@ public class Room {
   private Room[] doors;
   private Directions dir;
   ImageIcon image;
+  Player member;
   
   JLabel roomImage;
   JPanel panel;
@@ -64,12 +65,19 @@ public class Room {
   //MOD: wumpus
   
   wumpus = inWump;
+  }
+  
+  void addPlayer(Player inPlay){
+    //EFF: takes in player
     
+    member = inPlay;
   }
   
   Room move(String direction){
     //EFF: returns the room in the direction given
     
+    doors[dir.orient(direction)].member = member;
+    member = null;
     return doors[dir.orient(direction)];
   }
   

@@ -9,6 +9,7 @@ package eecs285.proj4.wumpus;
 
 abstract class Trap {
   //member variables
+  ScoreWindow scoreBox;
   Room location;
   
   abstract String callHint();
