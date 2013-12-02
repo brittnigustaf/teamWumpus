@@ -1,6 +1,13 @@
-package src.eecs285.proj4.wumpus;
+package eecs285.proj4.wumpus;
 
+import java.awt.Color;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public class Room {
   //Member variables
@@ -9,6 +16,10 @@ public class Room {
   private Room[] doors;
   private Directions dir;
   ImageIcon image;
+  
+  JLabel roomImage;
+  JPanel panel;
+  Border blackBorder = BorderFactory.createLineBorder(Color.black);   
   
   Room(){
     //EFF: inits the room as a empty box
@@ -21,6 +32,8 @@ public class Room {
     }
     trap = null;
     image = null;
+    
+    panel = new JPanel(new GridLayout(1,1));
   }
   
   void add(final Room inRoom, String direction){
@@ -34,6 +47,9 @@ public class Room {
     //EFF: adds the image to the room
     
     image = inImage;
+    roomImage = new JLabel(image);
+    panel.add(roomImage);
+    panel.setBorder(blackBorder);
   }
   
   void addTrap(final Trap inTrap){

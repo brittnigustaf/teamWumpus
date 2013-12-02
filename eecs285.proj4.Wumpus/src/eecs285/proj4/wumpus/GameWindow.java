@@ -1,7 +1,7 @@
 package eecs285.proj4.wumpus;
 
 import hold.Dwarf;
-inport hold.Player;
+import hold.Player;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
