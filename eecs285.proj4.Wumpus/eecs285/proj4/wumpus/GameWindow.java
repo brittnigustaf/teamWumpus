@@ -271,10 +271,6 @@ public class GameWindow extends JFrame {
         
     }
     
-    void move(Directions dir){
-        
-    }
-    
     void fire(Directions dir){
       //dirPanTitle.setTitle("Fire Directions");
         

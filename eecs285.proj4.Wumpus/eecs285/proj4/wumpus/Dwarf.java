@@ -42,7 +42,7 @@ public class Dwarf {
       col = 0;
       String colCount[];
         
-        try (InputStream in = Files.newInputStream(file);
+/*        try (InputStream in = Files.newInputStream(file);
             BufferedReader reader =
               new BufferedReader(new InputStreamReader(in))) {
             String line = null;
@@ -56,9 +56,19 @@ public class Dwarf {
             }
         } catch (IOException x) {
             System.err.println(x);
-        }
-        
-        row = rowCount;
+        }*/
+      //row = rowCount;
+
+      row = 8;
+      col = 8;
+      inLine ="E,F,E,K,1F,L,2L,L,\n"+
+    		  "B,J,A,A,I,E,K,F,\n"+
+    		  "E,F,D,B,C,H,C,D,\n"+
+    		  "B,A,C,L,E,C,L,D,\n"+
+    		  "E,J,K,F,B,G,K,I,\n"+
+    		  "H,K,J,A,G,OWK,J,C,\n"+
+    		  "D,D,L,B,F,H,K,F,\n"+
+    		  "B,J,G,G,J,C,B,C,";
         System.out.println(inLine);
         System.out.println(row);
         System.out.println(col);
@@ -90,12 +100,15 @@ public class Dwarf {
         }
       }
       
-      String hold[] = inLine.split(",");
-      for(int i=0;i<hold.length;i++){
-        cor = getCordinate(i);
-        plans = hold[i].split("");
-        build(plans, cor);
+      String[] row = inLine.split("\n");
+      for(int j = 0; j< row.length; j++){
+	      String hold[] = inLine.split(",");
+	      for(int i=0;i<hold.length;i++){
+	        cor = getCordinate(i);
+	        plans = hold[i].split("");
+	        build(plans, cor);
         
+	      }
       }
     }
     
