@@ -27,12 +27,12 @@ public class Dwarf {
     protected int col;
     
 
-    Dwarf(Path file, Player inList[], ScoreWindow inScore){
+    Dwarf(Path file, Player inList[]){
       //EFF: connects the inFile to the program and builds a dungeon
     //MOD: inLine
       
       readFile(file);
-      init(inList, inScore);
+      init(inList);
     }
     
     void readFile(Path file){
@@ -42,7 +42,7 @@ public class Dwarf {
       col = 0;
       String colCount[];
         
-/*        try (InputStream in = Files.newInputStream(file);
+        try (InputStream in = Files.newInputStream(file);
             BufferedReader reader =
               new BufferedReader(new InputStreamReader(in))) {
             String line = null;
@@ -56,38 +56,28 @@ public class Dwarf {
             }
         } catch (IOException x) {
             System.err.println(x);
-        }*/
-      //row = rowCount;
-
-      row = 8;
-      col = 8;
-      inLine ="E,F,E,K,1F,L,2L,L,\n"+
-    		  "B,J,A,A,I,E,K,F,\n"+
-    		  "E,F,D,B,C,H,C,D,\n"+
-    		  "B,A,C,L,E,C,L,D,\n"+
-    		  "E,J,K,F,B,G,K,I,\n"+
-    		  "H,K,J,A,G,OWK,J,C,\n"+
-    		  "D,D,L,B,F,H,K,F,\n"+
-    		  "B,J,G,G,J,C,B,C,";
-        System.out.println(inLine);
-        System.out.println(row);
-        System.out.println(col);
+        }
+        
+        row = rowCount;
+        //System.out.println(inLine);
+        //System.out.println(row);
+        //System.out.println(col);
     }
     
-    Dwarf(Player inList[], ScoreWindow inScore){
+    Dwarf(Player inList[]){
       //EFF: connects the file
-      Path path;
-      path = FileSystems.getDefault().getPath("D:\\java\\git\\teamWumpus\\eecs285.proj4.Wumpus\\bin\\eecs285\\proj4\\wumpus\\map", "map.txt");
-      readFile(path);
-      init(inList, inScore);
+      
+      col = 8;
+      row = 8;
+      inLine = "E,F,E,K,1F,L,2L,L,B,J,A,A,I,E,K,F,E,F,D,B,C,H,C,D,B,A,C,L,E,C,L,D,E,J,K,F,B,G,K,I,H,K,J,A,G,OWK,J,C,D,D,L,B,F,H,K,F,B,J,G,G,J,C,B,C,";
+      init(inList);
     }
     
-    void init(Player inList[], ScoreWindow inScore){
+    void init(Player inList[]){
       //EFF: builds the map
       
       playerList = inList;
       numPlayers = inList.length;
-      scoreBox = inScore;
       
       dungeon = new Room[row][col];
       
@@ -100,15 +90,12 @@ public class Dwarf {
         }
       }
       
-      String[] row = inLine.split("\n");
-      for(int j = 0; j< row.length; j++){
-	      String hold[] = inLine.split(",");
-	      for(int i=0;i<hold.length;i++){
-	        cor = getCordinate(i);
-	        plans = hold[i].split("");
-	        build(plans, cor);
+      String hold[] = inLine.split(",");
+      for(int i=0;i<hold.length;i++){
+        cor = getCordinate(i);
+        plans = hold[i].split("");
+        build(plans, cor);
         
-	      }
       }
     }
     

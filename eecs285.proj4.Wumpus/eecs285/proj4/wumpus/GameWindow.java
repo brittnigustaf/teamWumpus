@@ -82,7 +82,7 @@ public class GameWindow extends JFrame {
       
       players = new Player[1];
       
-      Dwarf Urist = new Dwarf(players, inScore);
+      Dwarf Urist = new Dwarf(players);
       rowNum = Urist.row;
       colNum = Urist.col;
       
