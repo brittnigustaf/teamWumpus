@@ -41,50 +41,15 @@ public class MapMaker {
     }
     
     public String makeMap(int x, int y, int numPits, int numBats){
-       /* Scanner scanner = new Scanner (System.in);
-        System.out.println(
-        		"Please input the dimensions of the map in the form: X Y");
-        String input = scanner.next(); // Get what the user types.
-        
-        
-        input = input.trim();
-        String dimensions[] = input.split(" ");
-        
-        System.out.println(
-        		"Please input the number of pit-traps you'd like:");
-        input = scanner.next(); // Get what the user types.
-        
-        input = input.trim();
-        
-        int numPits = Integer.parseInt(input);
-        
-        System.out.println(
-        		"Please input the number of bat-traps you'd like:");
-        input = scanner.next(); // Get what the user types.
-        
-        input = input.trim();
-        
-        int numBats = Integer.parseInt(input);
-        
-        scanner.close();
 
-        if(dimensions.length != 2){
-            return -1;
-        }
-        int x;
-        int y;
-        try{
-            x = Integer.parseInt(dimensions[0]);
-            y = Integer.parseInt(dimensions[1]);
-        }catch(Exception e){
-            return -1;
-        }*/
         int size = x * y;
         if(size <= 0){
             return "error :(";
         }
+        
         String[][] map = new String[x][y];
         littleRoom[][] rooms = new littleRoom[x][y];
+        
         for(int i = 0; i < x; i++){
         	for(int j = 0; j < y; j++){
         		map[i][j] = "";
@@ -108,6 +73,7 @@ public class MapMaker {
 
         
         int start2;
+        
         do{ //make sure start2 and start1 aren't the same square;
             start2 = rando.nextInt(Integer.MAX_VALUE) % size;
         }
