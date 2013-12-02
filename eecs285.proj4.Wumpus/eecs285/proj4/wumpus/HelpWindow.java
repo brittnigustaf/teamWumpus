@@ -2,6 +2,8 @@ package eecs285.proj4.wumpus;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.swing.*;
 
@@ -17,7 +19,7 @@ public class HelpWindow extends JFrame {
     JPanel pane = new JPanel(mainLayout);
     JLabel helpText = new JLabel();
     
-    
+    JTextArea instructions = new JTextArea(6,20);
     
     HelpWindow(){
         super("Instructions");
@@ -35,9 +37,15 @@ public class HelpWindow extends JFrame {
         // add the panel to frame
         con.add(pane); 
         
-        helpText.setText("THIS IS WHERE THE HELP WILL BE ISN'T THAT THE COOLIEST?");
+        helpText.setText("How to Play!");
         helpPane.add(helpText);
-        
+       
+        instructions.setEditable(false);
+        instructions.append("Gather gold, avoid the traps, and kill the dreaded Wumpus!\n"
+        		+ "Click on the arrows to go in the direction you want to go!\n\n" 
+        		+ "Read the Clues:\n"
+        		+ "Smell = Wumpus is nearby!\nWind = Trap is close!\nFluttering = Bats ahhh!");
+        instructions.setFont(new Font("Serif",Font.PLAIN, 24));
         backBtn.addActionListener( new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -49,6 +57,8 @@ public class HelpWindow extends JFrame {
         
         pane.add(helpPane, BorderLayout.NORTH);
         pane.add(btnPane, BorderLayout.SOUTH);
+        pane.add(instructions, BorderLayout.CENTER);
+
     }
 
 }
