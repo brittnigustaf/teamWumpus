@@ -1,8 +1,5 @@
 package eecs285.proj4.wumpus;
 
-import hold.Dwarf;
-import hold.Player;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -30,6 +27,8 @@ public class GameWindow extends JFrame {
 	Room curRoom = new Room();
   
 	Room roomMap[][];
+	int rowNum;
+	int colNum;
 	
 	boolean fireMode;
 	
