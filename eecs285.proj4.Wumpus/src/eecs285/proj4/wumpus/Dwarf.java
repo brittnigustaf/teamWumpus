@@ -31,7 +31,7 @@ public class Dwarf {
 	    //EFF: connects the inFile to the program and builds a dungeon
 		//MOD: inLine
 	    
-		readFile(file);
+	    readFile(file);
 	    init(inList);
 	  }
 	  
@@ -75,6 +75,8 @@ public class Dwarf {
 		  
 		  playerList = inList;
 		  numPlayers = inList.length;
+		  
+		  dungeon = new Room[row][col];
 		  
 		  int cor[];
 		  String plans[];
