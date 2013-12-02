@@ -66,7 +66,7 @@ public class ScoreWindow extends JFrame {
     }
     
     public Object getScores(){
-      /*  try {  
+       try {  
           HttpClient httpclient = new DefaultHttpClient();  
           HttpResponse response = httpclient.execute(new HttpGet(url)); 
     
@@ -75,8 +75,24 @@ public class ScoreWindow extends JFrame {
           System.out.println("[GET REQUEST]\tNetwork exception\t" +  e);  
         }  
     
-    */
+    
     String response = content.toString();
+    String output;
+    output = "NAME\t\tSCORE";
+    if(response.length() == 0){
+    	output += "\n \t NO HIGH SCORES";
+    }
+    else{
+	    String[] lines = response.split("\n");
+	    for(String line: lines){
+	    	String name_score[] = line.split(" ");
+	    	output += "\n" + name_score[0] + "\t\t" + name_score[1];
+	    }
+    }
+	scoreText.setText(output);
+
+    
+    
     
     return response;
     }
