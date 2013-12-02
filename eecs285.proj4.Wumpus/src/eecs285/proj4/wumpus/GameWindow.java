@@ -1,5 +1,8 @@
 package eecs285.proj4.wumpus;
 
+import hold.Dwarf;
+import hold.Player;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -58,13 +61,22 @@ public class GameWindow extends JFrame {
     JButton changeMode;
     
     GameWindow(){
-        //default 8x8, 1-player game
-    	super("Hunt The Wumpus!");
-        mapLayout = new GridLayout(8,8);
-        roomMap = new Room[8][8];
-        players = new Player[1];
-        initialize();
-    }
+      //EFF: generates a default 8x8, 1-player game
+      
+      super("Hunt The Wumpus!");
+      
+      players = new Player[1];
+      
+      Dwarf Urist = new Dwarf(players);
+      rowNum = Urist.row;
+      colNum = Urist.col;
+      
+      mapLayout = new GridLayout(rowNum, colNum);
+      roomMap = Urist.dungeon;
+         
+      initialize();
+     }
+    
     GameWindow(int x, int y, int numPlayers){
         //lets you make variable size rooms
     	super("Hunt The Wumpus!");
