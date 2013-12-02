@@ -1,31 +1,34 @@
 package eecs285.proj4.wumpus;
 
+import java.awt.Color;
 import java.awt.Point;
 
-import javax.swing.ImageIcon;
+import javax.swing.BorderFactory;
 
 public class Player
 {
   //Images are here for future use, not exactly implemented yet
+  /*
 	public ImageIcon curImage = new ImageIcon();
 	
 	private static ImageIcon moveUp = new ImageIcon();
 	private static ImageIcon moveDown = new ImageIcon();
 	private static ImageIcon moveLeft = new ImageIcon();
 	private static ImageIcon moveRight = new ImageIcon();
+	*/
 	//private static ImageIcon fireUp = new ImageIcon();
 	//private static ImageIcon fireDown = new ImageIcon();
 	//private static ImageIcon fireLeft = new ImageIcon();
 	//private static ImageIcon fireRight = new ImageIcon();
 	
 	//Directions enum, not a real player datapoint
-	private Directions directions = new Directions();
+	//private Directions directions = new Directions();
 	
 	//Arrow
 	private boolean arrow;
   //private boolean fireMode;
   
-	private int facingDir;
+	//private int facingDir;
 	private Point location;
 	private int playerNum;
 	private Room curRoom;
@@ -39,8 +42,8 @@ public class Player
     //fireMode = false;
     
     curRoom = null;
-    curImage = moveUp;
-    facingDir = directions.orient("north");
+    //curImage = moveUp;
+    //facingDir = directions.orient("north");
     location = new Point(0, 0);
     
     score = 0;
@@ -55,13 +58,18 @@ public class Player
 	  arrow = true;
 	  //fireMode = false;
 	  
-	  curRoom = inRoom; 
-	  curImage = moveUp;
-		facingDir = directions.orient("north");
-		location = inLocation;
-
     score = 0;
     playerNum = inPlayerNum;
+	  
+	  curRoom = inRoom; 
+    if (playerNum == 1)
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+    else
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+	  //curImage = moveUp;
+		//facingDir = directions.orient("north");
+		location = inLocation;
+
 		
 	}
 	
@@ -134,73 +142,98 @@ public class Player
 		return arrow;
 	}
   
-	//Determines if a player can move in the Specified Direction
-	//Should probably go into room class
-	/*
-  public boolean canMoveDir(String inDirection, String curRoomInfo)
-  {
-    //Check map and see if a path allows movement in the specified direction
-    
-    //Temporary Return Value.
-    return true;
-  }
-  */
-  
   //Moves the player North to a room
   public void moveNorth (Room toRoom, Point inLocation)
   {
-      curImage = moveUp;
-      facingDir = directions.orient("north");
-      
-      //Change Room
-      curRoom = toRoom;
-      
-      //Change Location
-      location = inLocation;
+    //curImage = moveUp;
+    //facingDir = directions.orient("north");
+    
+    //Update Previous Room Border
+    curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    
+    //Change Room
+    curRoom = toRoom;
+    
+    //Update New Room Border
+    if (playerNum == 1)
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+    else
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+    
+    //Change Location
+    location = inLocation;
   }
   
   //Moves the player South to a room
   public void moveSouth (Room toRoom, Point inLocation)
   {
-      curImage = moveDown;
-      facingDir = directions.orient("south");
-      
-      //Change Room
-      curRoom = toRoom;
-      
-      //Change Location
-      location = inLocation;
+    //curImage = moveDown;
+    //facingDir = directions.orient("south");
+    
+    //Update Previous Room Border
+    curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    
+    //Change Room
+    curRoom = toRoom;
+    
+    //Update New Room Border
+    if (playerNum == 1)
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+    else
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+    
+    //Change Location
+    location = inLocation;
   }
  
   //Moves the player East to a room
   public void moveEast (Room toRoom, Point inLocation)
   {
-      curImage = moveRight;
-      facingDir = directions.orient("east");
+    //curImage = moveRight;
+    //facingDir = directions.orient("east");
       
-      //Change Room
-      curRoom = toRoom;
+    //Update Previous Room Border
+    curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    
+    //Change Room
+    curRoom = toRoom;
+    
+    //Update New Room Border
+    if (playerNum == 1)
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+    else
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
       
-      //Change Location
-      location = inLocation;
+    //Change Location
+    location = inLocation;
   }
  
   //Moves the player West to a room
   public void moveWest (Room toRoom, Point inLocation)
   {
-      curImage = moveLeft;
-      facingDir = directions.orient("west");
+    //curImage = moveLeft;
+    //facingDir = directions.orient("west");
       
-      //Change Room
-      curRoom = toRoom;
+    //Update Previous Room Border
+    curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    
+    //Change Room
+    curRoom = toRoom;
+    
+    //Update New Room Border
+    if (playerNum == 1)
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+    else
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
       
-      //Change Location
-      location = inLocation;
+    //Change Location
+    location = inLocation;
   }
   
   //Moves the player in specified direction to a room
   public void move(int inDirection, Room toRoom, Point inLocation)
   {
+    /*
     facingDir = inDirection;
     
     switch(facingDir)
@@ -216,9 +249,19 @@ public class Player
       default: System.out.println("Invalid Player Direction.");
                break;
     }
+    */
+    
+    //Update Previous Room Border
+    curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     
     //Change Room
     curRoom = toRoom;
+    
+    //Update New Room Border
+    if (playerNum == 1)
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+    else
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
     
     //Change Location
     location = inLocation;

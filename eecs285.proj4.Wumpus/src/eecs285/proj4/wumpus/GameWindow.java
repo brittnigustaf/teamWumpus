@@ -1,12 +1,23 @@
 package eecs285.proj4.wumpus;
 
 import hold.Dwarf;
-import hold.Player;
+inport hold.Player;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -60,7 +71,10 @@ public class GameWindow extends JFrame {
     //Game Mode Panel members
     JButton changeMode;
     
-    GameWindow(){
+    Border blackBorder;
+    
+    GameWindow()
+    {
       //EFF: generates a default 8x8, 1-player game
       
       super("Hunt The Wumpus!");
@@ -75,8 +89,8 @@ public class GameWindow extends JFrame {
       roomMap = Urist.dungeon;
          
       initialize();
-     }
-    
+    }
+
     GameWindow(int x, int y, int numPlayers){
         //lets you make variable size rooms
     	super("Hunt The Wumpus!");
@@ -112,23 +126,30 @@ public class GameWindow extends JFrame {
         //fill options with desired options
         optionPane.setPreferredSize(new Dimension(250, 600));
         optionPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
+        
+        blackBorder = BorderFactory.createLineBorder(Color.red);
+        
         //Initialize Empty map!
         ImageList images = new ImageList();
         for (int i = 0; i < 8; i++)
         {
           for (int j = 0; j < 8; j++)
           {
-            JLabel emptyMap = new JLabel(images.EMPTY);
-            gamePane.add(emptyMap);
-          } 
+            roomMap[i][j] = new Room();
+            //gamePane.add(roomMap[i][j].layered);
+            roomMap[i][j].add(images.EMPTY);
+            //roomMap[i][j].panel.setBorder(blackBorder);
+            gamePane.add(roomMap[i][j].panel);
+            //JLabel emptyMap = new JLabel(images.EMPTY);
+            
+          }
         }
         
         //Build Player Score Info Panel
         JPanel playerInfo = new JPanel(new GridLayout(2,1));
         
         //Initialize player (FOR DEBUGGING!)
-        players[0] = new Player();
+        players[0] = new Player(1, roomMap[5][3], roomMap[5][3].panel.getLocation());
         
         int i = 0;
         playerScore = new ArrayList<JLabel>();
@@ -213,7 +234,6 @@ public class GameWindow extends JFrame {
         pane.add(infoPane, BorderLayout.SOUTH);
         pane.add(optionPane, BorderLayout.EAST);
         
-        
         // add the panel to frame      
         window.add(pane);
         window.pack();
@@ -221,6 +241,32 @@ public class GameWindow extends JFrame {
         
         //con.add(pane);
         //setVisible(true);
+        
+        /*
+        Border border = BorderFactory.createLineBorder(Color.red);
+        playerBorders.add(BorderFactory.createTitledBorder(border, players[0].name(), TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION));
+        
+        for (int k = 0; k < 8; k++)
+        {
+          for (int j = 0; j < 8; j++)
+          {
+            roomMap[k][j].roomImage.setBorder(BorderFactory.createTitledBorder(border, players[0].name(), TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION));
+            //JLabel emptyMap = new JLabel(images.EMPTY);
+
+            if (j > 0)
+            {
+              roomMap[k][j-1].roomImage.setBorder(blackBorder);
+            }
+            else if (k > 0)
+            {
+              roomMap[k-1][7].roomImage.setBorder(blackBorder);
+            }
+
+
+          }
+        }
+        */
+        //players[0].move(0, roomMap[1][1], roomMap[1][1].panel.getLocation());
         
     }
     
