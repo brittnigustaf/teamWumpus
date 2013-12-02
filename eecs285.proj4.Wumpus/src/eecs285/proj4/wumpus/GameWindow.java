@@ -79,6 +79,15 @@ public class GameWindow extends JFrame {
         optionPane.setPreferredSize(new Dimension(250, 600));
         optionPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+        ImageList images = new ImageList();
+        for (int i = 0; i < 8; i++)
+        {
+          for (int j = 0; j < 8; j++)
+          {
+            JLabel emptyTile = new JLabel(images.EMPTY);
+            gamePane.add(emptyTile);
+          }
+        }
         
         //set panes
         pane.add(gamePane, BorderLayout.WEST);
