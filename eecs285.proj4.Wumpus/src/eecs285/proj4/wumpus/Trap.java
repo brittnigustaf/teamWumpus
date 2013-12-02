@@ -19,7 +19,7 @@ abstract class Trap {
     //MOD: location
     
     location = inRoom;
-    location.add(this);
+    location.addTrap(this);
   }
 
 }

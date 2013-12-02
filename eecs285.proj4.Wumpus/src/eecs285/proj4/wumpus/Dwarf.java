@@ -1,5 +1,6 @@
 package eecs285.proj4.wumpus;
 
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,10 +22,12 @@ public class Dwarf {
 	  Room dungeon[][];
 	  String bluePrint[][];
 	  String inLine;
+	  Player playerList[];
+	  int numPlayers;
 	  
 
 	  
-	  Dwarf(Path file){
+	  Dwarf(Path file, Player inList[]){
 	    //EFF: connects the inFile to the program and builds a dungeon
 		//MOD: inLine
 	    
@@ -43,17 +46,20 @@ public class Dwarf {
 	    
 	    System.out.println(inLine);
 	    
-	    init();
+	    init(inList);
 	  }
 	  
-	  Dwarf(){
+	  Dwarf(Player inList[]){
 		  //EFF: connects the file
 		  inLine = "A,A,A,AG,A,A,A,A,A1,A,A,A,A,A,AW,A";
-		  init();
+		  init(inList);
 	  }
 	  
-	  void init(){
+	  void init(Player inList[]){
 		  //EFF: builds the map
+		  
+		  playerList = inList;
+		  numPlayers = inList.length;
 		  
 		  int cor[];
 		  String plans[];
@@ -151,19 +157,31 @@ public class Dwarf {
 			}
 			
 			if(plans[i].equals(codex.PITFALL)){
-				dungeon[cor[0]][cor[1]].add(new Pitfall(dungeon[cor[0]][cor[1]]));
+				dungeon[cor[0]][cor[1]].addTrap(new Pitfall(dungeon[cor[0]][cor[1]]));
 			}
 			  
 			if(plans[i].equals(codex.BATS)){
-				dungeon[cor[0]][cor[1]].add(new Bats(dungeon[cor[0]][cor[1]]));
+				dungeon[cor[0]][cor[1]].addTrap(new Bats(dungeon[cor[0]][cor[1]]));
 			}
 			  
 			if(plans[i].equals(codex.WUMPUS)){
-				dungeon[cor[0]][cor[1]].add(new Wumpus(dungeon[cor[0]][cor[1]]));
+				dungeon[cor[0]][cor[1]].addWumpus(new Wumpus(dungeon[cor[0]][cor[1]]));
 			}
 			
 			if(plans[i].equals(codex.GOLD)){
-				dungeon[cor[0]][cor[1]].add(new Gold(dungeon[cor[0]][cor[1]]));
+				dungeon[cor[0]][cor[1]].addTrap(new Gold(dungeon[cor[0]][cor[1]]));
+			}
+			
+			if(plans[i].equals(codex.PLAYER1)){
+				Point cordinate = new Point(cor[0], cor[1]);
+				playerList[0].setLocation(cordinate);
+			}
+			
+			if(plans[i].equals(codex.PLAYER2)){
+				if(numPlayers==2){
+					Point cordinate = new Point(cor[0], cor[1]);
+					playerList[1].setLocation(cordinate);
+				}
 			}
 			  
 		  }
