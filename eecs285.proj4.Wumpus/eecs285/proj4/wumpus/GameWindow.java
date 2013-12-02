@@ -7,7 +7,11 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -72,6 +76,9 @@ public class GameWindow extends JFrame {
     
     Border blackBorder;
     
+    private ButtonListener actionListener;
+    private int moveDir;
+    
     GameWindow(ScoreWindow inScore)
     {
       //EFF: generates a default 8x8, 1-player game
@@ -79,8 +86,10 @@ public class GameWindow extends JFrame {
       super("Hunt The Wumpus!");
       
       players = new Player[1];
+      players[0] = new Player();
+      //players[1] = new Player();
       
-      Dwarf Urist = new Dwarf(players, inScore);
+      Dwarf Urist = new Dwarf(players);
       rowNum = Urist.row;
       colNum = Urist.col;
       
@@ -217,6 +226,13 @@ public class GameWindow extends JFrame {
         dirPanel.add(new JLabel());
         dirPanel.add(southButton);
         dirPanel.add(new JLabel());
+        
+        actionListener = new ButtonListener();
+        northButton.addActionListener(actionListener);
+        westButton.addActionListener(actionListener);
+        eastButton.addActionListener(actionListener);
+        southButton.addActionListener(actionListener);
+        //e.addActionListener(actionListener);
 
         //Add direction panel titled border
         dirPanTitle = BorderFactory.createTitledBorder("Move Directions");
@@ -269,18 +285,91 @@ public class GameWindow extends JFrame {
         
     }
     
-    void move(Directions dir){
-        
-    }
-    
     void fire(Directions dir){
       //dirPanTitle.setTitle("Fire Directions");
         
     }
     
     void step(){
-        //is called after every action to update the game state
-        
+        event();
+        nextPlayer();        
+    }
+    
+    void nextPlayer(){
+    	int cur = curPlayer.playerNum;
+    	cur++;
+    	if(cur> players.length){
+    		cur =0;
+    	}
+    	curPlayer = players[cur];
+    }
+    
+    void event(){
+    	//EFF: plays event if there is a trap
+    	
+    	Trap trip = curPlayer.curRoom.trap;
+    	Wumpus wump = curPlayer.curRoom.wumpus;
+    	Random ran = new Random();
+    	
+    	if(wump != null){
+    		if(players.length==1){
+    			new GameOver(0, "You were eaten by the Wumpus!");
+    		}
+    		else {
+    			String name = Integer.toString(curPlayer.playerNum);
+    			nextPlayer();
+    			int score = 5000 - curPlayer.numMoves*100;
+    			new GameOver(score, "Player " + name + " was eaten by the Wumpus");
+    		}
+    	}
+    	if(trip !=null){
+    		if(trip instanceof Gold){
+    			int score = curPlayer.score;
+    			int moves = curPlayer.numMoves;
+    			String name = Integer.toString(curPlayer.playerNum);
+    			score = score + ran.nextInt(5000) + 5000;
+    			score = score - moves*100;
+    			if(score<0) score = 0;
+    			new GameOver(score, "Player "+ name +" found the gold!");                               
+    		}
+    		
+    		if(trip instanceof Bats){
+    			int newCol = ran.nextInt(colNum -1);
+    			int newRow = ran.nextInt(rowNum -1);
+    			
+    			curPlayer.setRoom(roomMap[newRow][newCol]);
+    			Point point = new Point(newRow, newCol);
+    			curPlayer.setLocation(point);
+    		}
+    		
+    		if(trip instanceof Pitfall){
+    			if(players.length==1){
+        			new GameOver(0, "You fell into a pit!");
+        		}
+        		else {
+        			String name = Integer.toString(curPlayer.playerNum);
+        			nextPlayer();
+        			int score = 5000 - curPlayer.numMoves*100;
+        			new GameOver(score, "Player " + name + " fell into a pit");
+        		}
+    		}
+    	}
+    }
+    
+    public class ButtonListener implements ActionListener
+    {
+      public void actionPerformed(ActionEvent event)
+      {
+        ImageList images = new ImageList();
+        if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.northArrow)
+          curPlayer.move(0, curPlayer.curRoom.move("north"), curPlayer.curRoom.move("north").panel.getLocation());
+        else if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.eastArrow)
+          curPlayer.move(1, curPlayer.curRoom.move("east"), curPlayer.curRoom.move("east").panel.getLocation());
+        else if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.southArrow)
+          curPlayer.move(2, curPlayer.curRoom.move("south"), curPlayer.curRoom.move("south").panel.getLocation());
+        else if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.westArrow)
+          curPlayer.move(3, curPlayer.curRoom.move("west"), curPlayer.curRoom.move("west").panel.getLocation());
+      }
     }
 
 }

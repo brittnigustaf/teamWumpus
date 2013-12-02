@@ -25,19 +25,23 @@ public class Player
 	//private Directions directions = new Directions();
 	
 	//Arrow
-	private boolean arrow;
+	protected boolean arrow;
   //private boolean fireMode;
   
 	//private int facingDir;
-	private Point location;
-	private int playerNum;
-	private Room curRoom;
-	private int score;
+	protected Point location;
+	protected int playerNum;
+	protected Room curRoom;
+	protected int score;
+	protected GameWindow game;
+
+	public int numMoves;
 	
 	public Player ()
 	{   
     setImages();
     
+    numMoves = 0;
     arrow = true;
     //fireMode = false;
     
@@ -55,6 +59,7 @@ public class Player
 	{
 	  setImages();
 	  
+	  numMoves = 0;
 	  arrow = true;
 	  //fireMode = false;
 	  
@@ -296,6 +301,10 @@ public class Player
   public Room getRoom()
   {
     return curRoom;
+  }
+  
+  public void connectGame(GameWindow inGame){
+	  game = inGame;
   }
 	
   public void setRoom (Room inRoom)

@@ -11,10 +11,10 @@ import javax.swing.border.Border;
 
 public class Room {
   //Member variables
-  private Trap trap;
-  private Wumpus wumpus;
-  private Room[] doors;
-  private Directions dir;
+  protected Trap trap;
+  protected Wumpus wumpus;
+  protected Room[] doors;
+  protected Directions dir;
   ImageIcon image;
   
   JLabel roomImage;
