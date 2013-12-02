@@ -1,5 +1,10 @@
 package eecs285.proj4.wumpus;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.Queue;
@@ -67,7 +72,7 @@ public class MapMaker {
         
         map[start1x][start1y] += "1"; // set that square to be the 
         							  //starting square for P1
-        System.out.println(start1x + "," + start1y);
+        //System.out.println(start1x + "," + start1y);
         
         rooms[start1x][start1y].P1Start = true;
 
@@ -146,8 +151,6 @@ public class MapMaker {
             }
             generateMap(mapAttempt,roomAttempt);
             printMap(mapAttempt, roomAttempt);
-            //isPath(mapAttempt, roomAttempt);
-            //break;
         }
         while(!isPath(mapAttempt, roomAttempt));
         
@@ -158,10 +161,32 @@ public class MapMaker {
         String out= "";
         for(String[] row: map){
         	for(String room: row){
-        		out += room;
+        		out += room + ",";
         	}
         	out+='\n';
         }
+        int numMaps;
+        File mapDir = null;
+		try {
+			mapDir = new File(getClass().getResource("maps/").toURI());
+			numMaps = mapDir.listFiles().length;
+		} catch (Exception e) {
+			numMaps = 0;
+		}
+        
+        
+        PrintWriter writer;
+		try {
+			writer = new PrintWriter("map" + numMaps, "UTF-8");
+			writer.println("The first line");
+		    writer.println("The second line");
+		    writer.close();
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Bad file write");
+			e.printStackTrace();
+		}
+       System.out.print(out);
        return out; 
     }
 
@@ -421,7 +446,7 @@ public class MapMaker {
             Integer curRoom = toVisit.remove();
             Integer curX = curRoom / x;
             Integer curY = curRoom % x;
-            System.out.println("At:" + curX + "," + curY);
+            //System.out.println("At:" + curX + "," + curY);
             littleRoom currentRoom = rooms[curX][curY];
             if(	!currentRoom.isPit && !currentRoom.isBat){
             	switch (currentRoom.type){ //add appropriate things to queue

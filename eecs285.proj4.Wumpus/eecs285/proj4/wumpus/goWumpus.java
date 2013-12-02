@@ -5,7 +5,7 @@ public class goWumpus {
     public static void main(String [] args){
         new BaseFrame();
         MapMaker map = new MapMaker();
-        map.makeMap(8,8,0,0);
+        map.makeMap(8,8,1,1);
     }
 
 }
