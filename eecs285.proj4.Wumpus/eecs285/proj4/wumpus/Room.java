@@ -16,6 +16,7 @@ public class Room {
   protected Room[] doors;
   protected Directions dir;
   ImageIcon image;
+  ImageIcon empty;
   
   JLabel roomImage;
   JPanel panel;
@@ -47,9 +48,18 @@ public class Room {
     //EFF: adds the image to the room
     
     image = inImage;
-    roomImage = new JLabel(image);
-    panel.add(roomImage);
-    panel.setBorder(blackBorder);
+  }
+  
+  void addEmpty(ImageIcon inImage){
+	  
+	empty = inImage;
+	roomImage = new JLabel(image);
+	panel.add(roomImage);
+	panel.setBorder(blackBorder);
+  }
+  
+  void reveal(){
+	  roomImage.setIcon(image);
   }
   
   void addTrap(final Trap inTrap){
