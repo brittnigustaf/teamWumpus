@@ -72,7 +72,7 @@ public class GameWindow extends JFrame {
     
     Border blackBorder;
     
-    GameWindow()
+    GameWindow(ScoreWindow inScore)
     {
       //EFF: generates a default 8x8, 1-player game
       
@@ -80,7 +80,7 @@ public class GameWindow extends JFrame {
       
       players = new Player[1];
       
-      Dwarf Urist = new Dwarf(players);
+      Dwarf Urist = new Dwarf(players, inScore);
       rowNum = Urist.row;
       colNum = Urist.col;
       
@@ -90,7 +90,7 @@ public class GameWindow extends JFrame {
       initialize();
     }
 
-    GameWindow(int x, int y, int numPlayers){
+    GameWindow(int x, int y, int numPlayers, ScoreWindow inScore){
         //lets you make variable size rooms
     	super("Hunt The Wumpus!");
         mapLayout = new GridLayout(x,y);

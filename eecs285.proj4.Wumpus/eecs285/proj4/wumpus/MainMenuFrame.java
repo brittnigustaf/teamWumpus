@@ -127,7 +127,7 @@ public class MainMenuFrame extends JFrame {
     };
     
     private void play(){
-        new GameWindow();
+        new GameWindow(scoreWindow);
         setVisible(false);
     };
     

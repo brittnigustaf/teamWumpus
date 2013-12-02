@@ -2,34 +2,6 @@ package eecs285.proj4.wumpus;
 
 import java.awt.Point;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import java.awt.Point;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-/** Purpose: dwarf constructs the map given a bluePrint.
- * It requires a blueprint: filename
- * 
- * @author Jessica DeVriese
- */
-
-import java.awt.Point;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -46,19 +18,21 @@ import java.nio.file.Path;
 public class Dwarf {
     //Member variables
     Room dungeon[][];
-    protected String inLine;
     Player playerList[];
+    ScoreWindow scoreBox;
+    
+    protected String inLine;
     protected int numPlayers;
     protected int row;
     protected int col;
     
 
-    Dwarf(Path file, Player inList[]){
+    Dwarf(Path file, Player inList[], ScoreWindow inScore){
       //EFF: connects the inFile to the program and builds a dungeon
     //MOD: inLine
       
       readFile(file);
-      init(inList);
+      init(inList, inScore);
     }
     
     void readFile(Path file){
@@ -90,19 +64,20 @@ public class Dwarf {
         System.out.println(col);
     }
     
-    Dwarf(Player inList[]){
+    Dwarf(Player inList[], ScoreWindow inScore){
       //EFF: connects the file
       Path path;
       path = FileSystems.getDefault().getPath("D:\\java\\git\\teamWumpus\\eecs285.proj4.Wumpus\\bin\\eecs285\\proj4\\wumpus\\map", "map.txt");
       readFile(path);
-      init(inList);
+      init(inList, inScore);
     }
     
-    void init(Player inList[]){
+    void init(Player inList[], ScoreWindow inScore){
       //EFF: builds the map
       
       playerList = inList;
       numPlayers = inList.length;
+      scoreBox = inScore;
       
       dungeon = new Room[row][col];
       
