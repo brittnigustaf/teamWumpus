@@ -231,72 +231,11 @@ public class Dwarf {
       
       int cor[] = new int[2];
       
-      switch(i){
-      case 0:
-        cor[0] = 0;
-        cor[1] = 0;
-        break;
-      case 1:
-        cor[0] = 0;
-        cor[1] = 1;
-        break;
-      case 2:
-        cor[0] = 0;
-        cor[1] = 2;
-        break;
-      case 3:
-        cor[0] = 0;
-        cor[1] = 3;
-        break;
-      case 4:
-        cor[0] = 1;
-        cor[1] = 0;
-        break;
-      case 5:
-        cor[0] = 1;
-        cor[1] = 1;
-        break;
-      case 6:
-        cor[0] = 1;
-        cor[1] = 2;
-        break;
-      case 7:
-        cor[0] = 1;
-        cor[1] = 3;
-        break;
-      case 8:
-        cor[0] = 2;
-        cor[1] = 0;
-        break;
-      case 9:
-        cor[0] = 2;
-        cor[1] = 1;
-        break;
-      case 10:
-        cor[0] = 2;
-        cor[1] = 2;
-        break;
-      case 11:
-        cor[0] = 2;
-        cor[1] = 3;
-        break;
-      case 12:
-        cor[0] = 3;
-        cor[1] = 0;
-        break;
-      case 13:
-        cor[0] = 3;
-        cor[1] = 1;
-        break;
-      case 14:
-        cor[0] = 3;
-        cor[1] = 2;
-        break;
-      default:
-        cor[0] = 3;
-        cor[1] = 3;
-        break;
-      }
+      int newRow = i/col;
+      int newCol = i%col -1;
+      
+      cor[0] = newRow;
+      cor[1] = newCol;
       
       return cor;
     }
