@@ -281,8 +281,18 @@ public class GameWindow extends JFrame {
     }
     
     void step(){
+        event();
+        nextPlayer();
         
-        
+    }
+    
+    void nextPlayer(){
+    	int cur = curPlayer.playerNum;
+    	cur++;
+    	if(cur> players.length){
+    		cur =0;
+    	}
+    	curPlayer = players[cur];
     }
     
     void event(){
@@ -293,16 +303,25 @@ public class GameWindow extends JFrame {
     	Random ran = new Random();
     	
     	if(wump != null){
-    		new GameOver(0, "You were eaten by the Wumpus!");
+    		if(players.length==1){
+    			new GameOver(0, "You were eaten by the Wumpus!");
+    		}
+    		else {
+    			String name = Integer.toString(curPlayer.playerNum);
+    			nextPlayer();
+    			int score = 5000 - curPlayer.numMoves*100;
+    			new GameOver(score, "Player " + name + " was eaten by the Wumpus");
+    		}
     	}
     	if(trip !=null){
     		if(trip instanceof Gold){
     			int score = curPlayer.score;
     			int moves = curPlayer.numMoves;
+    			String name = Integer.toString(curPlayer.playerNum);
     			score = score + ran.nextInt(5000) + 5000;
     			score = score - moves*100;
     			if(score<0) score = 0;
-    			new GameOver(score, "You found the gold!");
+    			new GameOver(score, "Player "+ name +" found the gold!");                               
     		}
     		
     		if(trip instanceof Bats){
@@ -315,7 +334,15 @@ public class GameWindow extends JFrame {
     		}
     		
     		if(trip instanceof Pitfall){
-    			new GameOver(0, "You fell into a pit!");
+    			if(players.length==1){
+        			new GameOver(0, "You fell into a pit!");
+        		}
+        		else {
+        			String name = Integer.toString(curPlayer.playerNum);
+        			nextPlayer();
+        			int score = 5000 - curPlayer.numMoves*100;
+        			new GameOver(score, "Player " + name + " fell into a pit");
+        		}
     		}
     	}
     }
