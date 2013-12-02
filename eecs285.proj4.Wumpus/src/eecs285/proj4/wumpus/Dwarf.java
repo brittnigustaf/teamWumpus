@@ -1,5 +1,6 @@
 package eecs285.proj4.wumpus;
 
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,47 +20,67 @@ import java.nio.file.Path;
 public class Dwarf {
 	  //Member variables
 	  Room dungeon[][];
-	  String bluePrint[][];
-	  String inLine;
+	  private String inLine;
+	  Player playerList[];
+	  private int numPlayers;
+	  private int row;
+	  private int col;
 	  
 
-	  
-	  Dwarf(Path file){
+	  Dwarf(Path file, Player inList[]){
 	    //EFF: connects the inFile to the program and builds a dungeon
 		//MOD: inLine
 	    
-	    inLine = "";
-	    
-	    try (InputStream in = Files.newInputStream(file);
-	        BufferedReader reader =
-	          new BufferedReader(new InputStreamReader(in))) {
-	        String line = null;
-	        while ((line = reader.readLine()) != null) {
-	            inLine = inLine + line;
-	        }
-	    } catch (IOException x) {
-	        System.err.println(x);
-	    }
-	    
-	    System.out.println(inLine);
-	    
-	    init();
+		readFile(file);
+	    init(inList);
 	  }
 	  
-	  Dwarf(){
+	  void readFile(Path file){
+		  
+		  inLine = "";
+		  int rowCount = 0;
+		  col = 0;
+		  String colCount[];
+		    
+		    try (InputStream in = Files.newInputStream(file);
+		        BufferedReader reader =
+		          new BufferedReader(new InputStreamReader(in))) {
+		        String line = null;
+		        while ((line = reader.readLine()) != null) {
+		            inLine = inLine + line;
+		            if(col == 0){
+		            	colCount = inLine.split(",");
+		            	col = colCount.length;
+		            }
+		            rowCount++;
+		        }
+		    } catch (IOException x) {
+		        System.err.println(x);
+		    }
+		    
+		    row = rowCount;
+		    System.out.println(inLine);
+	  }
+	  
+	  Dwarf(Player inList[]){
 		  //EFF: connects the file
 		  inLine = "A,A,A,AG,A,A,A,A,A1,A,A,A,A,A,AW,A";
-		  init();
+		  row = 4;
+		  col = 4;
+		  init(inList);
 	  }
 	  
-	  void init(){
+	  void init(Player inList[]){
 		  //EFF: builds the map
+		  
+		  playerList = inList;
+		  numPlayers = inList.length;
 		  
 		  int cor[];
 		  String plans[];
 		  
-		  for(int i=0;i<4;i++){
-			  for(int j=0;j<4;j++){
+		  for(int i=0;i<row;i++){
+			  for(int j=0;j<col;j++){
 				  dungeon[i][j] = new Room();
 			  }
 		  }
@@ -151,19 +172,31 @@ public class Dwarf {
 			}
 			
 			if(plans[i].equals(codex.PITFALL)){
-				dungeon[cor[0]][cor[1]].add(new Pitfall(dungeon[cor[0]][cor[1]]));
+				dungeon[cor[0]][cor[1]].addTrap(new Pitfall(dungeon[cor[0]][cor[1]]));
 			}
 			  
 			if(plans[i].equals(codex.BATS)){
-				dungeon[cor[0]][cor[1]].add(new Bats(dungeon[cor[0]][cor[1]]));
+				dungeon[cor[0]][cor[1]].addTrap(new Bats(dungeon[cor[0]][cor[1]]));
 			}
 			  
 			if(plans[i].equals(codex.WUMPUS)){
-				dungeon[cor[0]][cor[1]].add(new Wumpus(dungeon[cor[0]][cor[1]]));
+				dungeon[cor[0]][cor[1]].addWumpus(new Wumpus(dungeon[cor[0]][cor[1]]));
 			}
 			
 			if(plans[i].equals(codex.GOLD)){
-				dungeon[cor[0]][cor[1]].add(new Gold(dungeon[cor[0]][cor[1]]));
+				dungeon[cor[0]][cor[1]].addTrap(new Gold(dungeon[cor[0]][cor[1]]));
+			}
+			
+			if(plans[i].equals(codex.PLAYER1)){
+				Point cordinate = new Point(cor[0], cor[1]);
+				playerList[0].setLocation(cordinate);
+			}
+			
+			if(plans[i].equals(codex.PLAYER2)){
+				if(numPlayers==2){
+					Point cordinate = new Point(cor[0], cor[1]);
+					playerList[1].setLocation(cordinate);
+				}
 			}
 			  
 		  }
