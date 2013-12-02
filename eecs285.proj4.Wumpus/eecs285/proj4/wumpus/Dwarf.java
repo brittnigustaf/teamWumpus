@@ -133,8 +133,6 @@ public class Dwarf {
       }
       
       if(plans[i].equals(codex.DOWN_RIGHT)){
-    	  System.out.println(cor[0] + " " + cor[1]);
-
         dungeon[cor[0]][cor[1]].add(images.DOWN_RIGHT);
         connect(cor, "south");
         connect(cor, "east");
