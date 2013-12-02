@@ -94,12 +94,14 @@ public class ScoreWindow extends JFrame {
     //System.out.println("response = " + response);
 
     String output = "";
-    String title;
+    String title = "";
     title = "NAME\t\tSCORE";
     
     SimpleAttributeSet titleAttr = new SimpleAttributeSet();
 	StyleConstants.setFontFamily(titleAttr, "Verdana");
 	StyleConstants.setForeground(titleAttr, Color.BLACK);
+	StyleConstants.setUnderline(titleAttr, true);
+	StyleConstants.setFontSize(titleAttr, 20);
 	
     if(response.length() == 0){
     	output += "\n \t NO HIGH SCORES";
@@ -117,6 +119,8 @@ public class ScoreWindow extends JFrame {
 	
 	try {
 		scoreText.getDocument().insertString(0, output, scoreAttr);
+		scoreText.getDocument().insertString(0, title, titleAttr);
+
 	} catch (Exception e) {
 		System.out.println("Bad string format" + e);
 	}
