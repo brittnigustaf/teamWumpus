@@ -81,7 +81,8 @@ public class ScoreWindow extends JFrame {
     
           content = response.getEntity();  
         } catch (Exception e) {  
-          System.out.println("[GET REQUEST]\tNetwork exception\t" +  e);  
+          System.out.println("[GET REQUEST]\tNetwork exception\t" +  e); 
+          return;
         }  
     
     
@@ -90,6 +91,7 @@ public class ScoreWindow extends JFrame {
 		response = EntityUtils.toString(content);
 	} catch (Exception e) {
 		 System.out.println("[GET REQUEST]\tNetwork exception\t" + e);
+         return;
 	}
     //System.out.println("response = " + response);
 
