@@ -7,7 +7,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -279,8 +281,43 @@ public class GameWindow extends JFrame {
     }
     
     void step(){
-        //is called after every action to update the game state
         
+        
+    }
+    
+    void event(){
+    	//EFF: plays event if there is a trap
+    	
+    	Trap trip = curPlayer.curRoom.trap;
+    	Wumpus wump = curPlayer.curRoom.wumpus;
+    	Random ran = new Random();
+    	
+    	if(wump != null){
+    		new GameOver(0, "You were eaten by the Wumpus!");
+    	}
+    	if(trip !=null){
+    		if(trip instanceof Gold){
+    			int score = curPlayer.score;
+    			int moves = curPlayer.numMoves;
+    			score = score + ran.nextInt(5000) + 5000;
+    			score = score - moves*100;
+    			if(score<0) score = 0;
+    			new GameOver(score, "You found the gold!");
+    		}
+    		
+    		if(trip instanceof Bats){
+    			int newCol = ran.nextInt(colNum -1);
+    			int newRow = ran.nextInt(rowNum -1);
+    			
+    			curPlayer.setRoom(roomMap[newRow][newCol]);
+    			Point point = new Point(newRow, newCol);
+    			curPlayer.setLocation(point);
+    		}
+    		
+    		if(trip instanceof Pitfall){
+    			new GameOver(0, "You fell into a pit!");
+    		}
+    	}
     }
 
 }
