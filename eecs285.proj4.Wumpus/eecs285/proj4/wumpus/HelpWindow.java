@@ -2,6 +2,8 @@ package eecs285.proj4.wumpus;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.swing.*;
 
@@ -16,7 +18,7 @@ public class HelpWindow extends JFrame {
     JPanel helpPane = new JPanel();
     JPanel pane = new JPanel(mainLayout);
     JLabel helpText = new JLabel();
-
+    
     JTextArea instructions = new JTextArea(6,20);
     
     HelpWindow(){
@@ -37,7 +39,7 @@ public class HelpWindow extends JFrame {
         
         helpText.setText("How to Play!");
         helpPane.add(helpText);
-
+       
         instructions.setEditable(false);
         instructions.append("Gather gold, avoid the traps, and kill the dreaded Wumpus!\n"
         		+ "Click on the arrows to go in the direction you want to go!\n\n" 
