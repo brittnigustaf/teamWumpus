@@ -194,14 +194,12 @@ public class Dwarf {
       
       if(plans[i].equals(codex.PLAYER1)){
         Point cordinate = new Point(cor[0], cor[1]);
-        dungeon[cor[0]][cor[1]].addPlayer(playerList[0]);
         playerList[0].setLocation(cordinate);
       }
       
       if(plans[i].equals(codex.PLAYER2)){
         if(numPlayers==2){
           Point cordinate = new Point(cor[0], cor[1]);
-          dungeon[cor[0]][cor[1]].addPlayer(playerList[1]);
           playerList[1].setLocation(cordinate);
         }
       }
