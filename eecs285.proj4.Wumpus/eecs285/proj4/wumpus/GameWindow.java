@@ -278,8 +278,7 @@ public class GameWindow extends JFrame {
     
     void step(){
         event();
-        nextPlayer();
-        
+        nextPlayer();        
     }
     
     void nextPlayer(){
