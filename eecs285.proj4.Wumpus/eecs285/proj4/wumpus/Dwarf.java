@@ -87,6 +87,9 @@ public class Dwarf {
       for(int i=0;i<row;i++){
         for(int j=0;j<col;j++){
           dungeon[i][j] = new Room();
+          ImageList forempty = new ImageList();
+          dungeon[i][j].addEmpty(forempty.EMPTY);
+          dungeon[i][j].add(forempty.EMPTY);
         }
       }
       
@@ -197,12 +200,14 @@ public class Dwarf {
       if(plans[i].equals(codex.PLAYER1)){
         Point cordinate = new Point(cor[0], cor[1]);
         playerList[0].setLocation(cordinate);
+        playerList[0].setRoom(dungeon[cor[0]][cor[1]]);
       }
       
       if(plans[i].equals(codex.PLAYER2)){
         if(numPlayers==2){
           Point cordinate = new Point(cor[0], cor[1]);
           playerList[1].setLocation(cordinate);
+          playerList[1].setRoom(dungeon[cor[0]][cor[1]]);
         }
       }
         

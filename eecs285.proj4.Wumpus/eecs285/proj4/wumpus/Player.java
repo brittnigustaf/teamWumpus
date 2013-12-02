@@ -7,23 +7,7 @@ import javax.swing.BorderFactory;
 
 public class Player
 {
-  //Images are here for future use, not exactly implemented yet
-  /*
-	public ImageIcon curImage = new ImageIcon();
-	
-	private static ImageIcon moveUp = new ImageIcon();
-	private static ImageIcon moveDown = new ImageIcon();
-	private static ImageIcon moveLeft = new ImageIcon();
-	private static ImageIcon moveRight = new ImageIcon();
-	*/
-	//private static ImageIcon fireUp = new ImageIcon();
-	//private static ImageIcon fireDown = new ImageIcon();
-	//private static ImageIcon fireLeft = new ImageIcon();
-	//private static ImageIcon fireRight = new ImageIcon();
-	
-	//Directions enum, not a real player datapoint
-	//private Directions directions = new Directions();
-	
+ 
 	//Arrow
 	protected boolean arrow;
   //private boolean fireMode;
@@ -80,62 +64,7 @@ public class Player
 	
 	private void setImages()
 	{
-	   //add player images
-    /*
-    moveUp = 
-    moveDown = 
-    moveLeft = 
-    moveRight = 
-    fireUp = 
-    fireDown = 
-    fireLeft = 
-    fireRight = 
-    */
 	}
-	
-	/*
-	public void setFireMode(boolean mode)
-	{
-	  //Returns if player is already in Fire Mode
-	  if (fireMode && mode)
-	    return;
-	  
-		fireMode = mode;
-		if (fireMode)
-  	{
-  		switch(facingDir)
-  		{
-    		case 0:  curImage = fireUp;
-    		         break;
-        case 1:  curImage = fireRight;
-                 break;
-        case 2:  curImage = fireDown;
-                 break;
-        case 3:  curImage = fireLeft;
-                 break;
-        default: System.out.println("Invalid Player Fire Direction.");
-                 break;
-  		}
-  	}
-		
-		else
-  	{
-      switch(facingDir)
-      {
-        case 0:  curImage = moveUp;
-                 break;
-        case 1:  curImage = moveRight;
-                 break;
-        case 2:  curImage = moveDown;
-                 break;
-        case 3:  curImage = moveLeft;
-                 break;
-        default: System.out.println("Invalid Player Direction.");
-                 break;
-    	}
-  	}
-	}
-	*/
 	
 	public void shootArrow()
 	{

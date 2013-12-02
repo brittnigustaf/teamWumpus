@@ -144,8 +144,6 @@ public class GameWindow extends JFrame {
           for (int j = 0; j < 8; j++)
           {
             roomMap[i][j] = new Room();
-            //gamePane.add(roomMap[i][j].layered);
-            roomMap[i][j].add(images.EMPTY);
             //roomMap[i][j].panel.setBorder(blackBorder);
             gamePane.add(roomMap[i][j].panel);
             //JLabel emptyMap = new JLabel(images.EMPTY);
@@ -253,36 +251,11 @@ public class GameWindow extends JFrame {
         window.add(pane);
         window.pack();
         window.setVisible(true);
-        
-        //con.add(pane);
-        //setVisible(true);
-        
-        /*
-        Border border = BorderFactory.createLineBorder(Color.red);
-        playerBorders.add(BorderFactory.createTitledBorder(border, players[0].name(), TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION));
-        
-        for (int k = 0; k < 8; k++)
-        {
-          for (int j = 0; j < 8; j++)
-          {
-            roomMap[k][j].roomImage.setBorder(BorderFactory.createTitledBorder(border, players[0].name(), TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION));
-            //JLabel emptyMap = new JLabel(images.EMPTY);
+        for(Player pl: players){
+        	pl.curRoom.reveal();
 
-            if (j > 0)
-            {
-              roomMap[k][j-1].roomImage.setBorder(blackBorder);
-            }
-            else if (k > 0)
-            {
-              roomMap[k-1][7].roomImage.setBorder(blackBorder);
-            }
-
-
-          }
         }
-        */
-        //players[0].move(0, roomMap[1][1], roomMap[1][1].panel.getLocation());
-        
+       
     }
     
     void fire(Directions dir){
@@ -291,6 +264,7 @@ public class GameWindow extends JFrame {
     }
     
     void step(){
+    	curPlayer.curRoom.reveal();
         event();
         nextPlayer();        
     }
@@ -361,15 +335,15 @@ public class GameWindow extends JFrame {
       public void actionPerformed(ActionEvent event)
       {
         ImageList images = new ImageList();
-        if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.northArrow)
+        String desc = ((ImageIcon)((JButton)event.getSource()).getIcon()).getDescription();
+        if (desc.equals(images.northArrow.getDescription()))
           curPlayer.move(0, curPlayer.curRoom.move("north"), curPlayer.curRoom.move("north").panel.getLocation());
-        else if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.eastArrow)
+        else if (desc.equals(images.eastArrow.getDescription()))
           curPlayer.move(1, curPlayer.curRoom.move("east"), curPlayer.curRoom.move("east").panel.getLocation());
-        else if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.southArrow)
+        else if (desc.equals(images.southArrow.getDescription()))
           curPlayer.move(2, curPlayer.curRoom.move("south"), curPlayer.curRoom.move("south").panel.getLocation());
-        else if (((ImageIcon)((JButton)event.getSource()).getIcon()) == images.westArrow)
+        else if (desc.equals(images.westArrow.getDescription()))
           curPlayer.move(3, curPlayer.curRoom.move("west"), curPlayer.curRoom.move("west").panel.getLocation());
       }
     }
-
-}
+  }
