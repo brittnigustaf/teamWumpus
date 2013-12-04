@@ -218,17 +218,24 @@ public class Dwarf {
       //EFF: Connects the two rooms
       //MOD: Dungeon
       
-      if(direction.equals("north")) dungeon[cor[0]][cor[1]].add(dungeon[wrap(cor[0]-1)][cor[1]], "north");
-      if(direction.equals("east")) dungeon[cor[0]][cor[1]].add(dungeon[cor[0]][wrap(cor[1]+1)], "east");
-      if(direction.equals("south")) dungeon[cor[0]][cor[1]].add(dungeon[wrap(cor[0]+1)][cor[1]], "south");
-      if(direction.equals("west")) dungeon[cor[0]][cor[1]].add(dungeon[cor[0]][wrap(cor[1]-1)], "west");
+      if(direction.equals("north")) dungeon[cor[0]][cor[1]].add(dungeon[wrap(cor[0]-1,0)][cor[1]], "north");
+      if(direction.equals("east")) dungeon[cor[0]][cor[1]].add(dungeon[cor[0]][wrap(cor[1]+1,1)], "east");
+      if(direction.equals("south")) dungeon[cor[0]][cor[1]].add(dungeon[wrap(cor[0]+1,0)][cor[1]], "south");
+      if(direction.equals("west")) dungeon[cor[0]][cor[1]].add(dungeon[cor[0]][wrap(cor[1]-1, 1)], "west");
     }
     
-    int wrap(int cor){
+    int wrap(int cor, int dir){
       //EFF: helps warp the board
       
-      if(cor<0) return 3;
-      if(cor>3) return 0;
+      if(dir == 0){
+        if(cor<0) return (row - 1);
+        if(cor>(row -1)) return 0;
+      }
+      
+      if(dir == 1){
+        if(cor<0) return (col - 1);
+        if(cor>(col -1)) return 0;
+      }
       
       return cor;
     }
