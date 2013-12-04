@@ -28,9 +28,9 @@ public class GameWindow extends JFrame {
     Player curPlayer;
     Player players[];
     
-	Room curRoom = new Room();
   
 	Room roomMap[][];
+	Dwarf Urist;
 	int rowNum;
 	int colNum;
 	
@@ -89,7 +89,7 @@ public class GameWindow extends JFrame {
       players[0] = new Player();
       //players[1] = new Player();
       
-      Dwarf Urist = new Dwarf(players);
+      Urist = new Dwarf(players);
       rowNum = Urist.row;
       colNum = Urist.col;
       
@@ -143,9 +143,7 @@ public class GameWindow extends JFrame {
         {
           for (int j = 0; j < 8; j++)
           {
-            roomMap[i][j] = new Room();
-            //roomMap[i][j].panel.setBorder(blackBorder);
-            gamePane.add(roomMap[i][j].panel);
+            gamePane.add(Urist.dungeon[i][j].panel);
             //JLabel emptyMap = new JLabel(images.EMPTY);
             
           }
