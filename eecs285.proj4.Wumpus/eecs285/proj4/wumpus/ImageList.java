@@ -128,10 +128,10 @@ public class ImageList {
     BufferedImage westArrow_img = null;
     
     try {
-      northArrow_img = ImageIO.read(new File("images/arrows/north_arrow.png", "northImg"));
-      eastArrow_img = ImageIO.read(new File("images/arrows/east_arrow.png", "eastImg"));
-      southArrow_img = ImageIO.read(new File("images/arrows/south_arrow.png", "southImg"));
-      westArrow_img = ImageIO.read(new File("images/arrows/west_arrow.png", "westImg"));
+      northArrow_img = ImageIO.read(new File("images/arrows/north_arrow.png"));//, "northImg"));
+      eastArrow_img = ImageIO.read(new File("images/arrows/east_arrow.png"));//, "eastImg"));
+      southArrow_img = ImageIO.read(new File("images/arrows/south_arrow.png"));//, "southImg"));
+      westArrow_img = ImageIO.read(new File("images/arrows/west_arrow.png"));//, "westImg"));
     } 
     catch (IOException e) {
       e.printStackTrace();

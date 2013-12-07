@@ -112,7 +112,7 @@ public class GameWindow extends JFrame {
         gamePane = new JPanel(mapLayout);
         
       //size the window
-        setBounds(0,0,1000,800);
+        setBounds(0,0,1200,800);
         
         //close on "x"
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -127,12 +127,12 @@ public class GameWindow extends JFrame {
         gamePane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
         //fill Info with status icons
-        infoPane.setPreferredSize(new Dimension(1000,200));
+        infoPane.setPreferredSize(new Dimension(1200,200));
         infoPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
        
         //fill options with desired options
-        optionPane.setPreferredSize(new Dimension(250, 600));
+        optionPane.setPreferredSize(new Dimension(350, 600));
         optionPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
         blackBorder = BorderFactory.createLineBorder(Color.red);

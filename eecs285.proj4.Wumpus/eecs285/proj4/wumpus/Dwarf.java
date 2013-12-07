@@ -25,6 +25,7 @@ public class Dwarf {
     protected int numPlayers;
     protected int row;
     protected int col;
+    ImageList images = new ImageList();
     
 
     Dwarf(Path file, Player inList[]){
@@ -83,13 +84,11 @@ public class Dwarf {
       
       int cor[];
       String plans[];
-      
       for(int i=0;i<row;i++){
         for(int j=0;j<col;j++){
           dungeon[i][j] = new Room();
-          ImageList forempty = new ImageList();
-          dungeon[i][j].addEmpty(forempty.EMPTY);
-          dungeon[i][j].add(forempty.EMPTY);
+          dungeon[i][j].addEmpty(images.EMPTY);
+          dungeon[i][j].add(images.EMPTY);
         }
       }
       
@@ -106,9 +105,7 @@ public class Dwarf {
       //EFF: designs the room based on the plans
       for(int i=0; i<plans.length;i++){
       Codex codex = new Codex();
-      
-      ImageList images = new ImageList();
-      
+
       if(plans[i].equals(codex.CROSS)){
         dungeon[cor[0]][cor[1]].add(images.CROSS);
         connect(cor, "north");

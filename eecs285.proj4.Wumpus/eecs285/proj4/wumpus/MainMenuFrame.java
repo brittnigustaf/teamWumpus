@@ -54,7 +54,7 @@ public class MainMenuFrame extends JFrame {
         //JPanel southPane = new JPanel(southLayout);
         
         //size the window
-        setBounds(0,0,1000,800);
+        setBounds(0,0,1000,600);
         
         //close on "x"
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
