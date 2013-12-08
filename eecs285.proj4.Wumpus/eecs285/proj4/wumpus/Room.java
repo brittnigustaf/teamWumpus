@@ -176,6 +176,22 @@ public class Room {
     
   }
   
+  Boolean[] checkRoom(){
+    //EFF: returns a boolean array for valid moves
+    
+    Boolean valid[] = new Boolean[4];
+    
+    for(int i=0; i<4;i++){
+      if(doors[i]!=null){
+        valid[i] = true;
+      }
+      else {
+        valid[i] = false;
+      }
+    }
+    
+    return valid;
+  }
   
 
 }
