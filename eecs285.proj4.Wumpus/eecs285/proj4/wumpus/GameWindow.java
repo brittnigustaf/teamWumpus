@@ -279,11 +279,12 @@ public class GameWindow extends JFrame {
     void hint(){
       //EFF: prints hints to user screen
       
-      String allOfTheHints = "\n" + "You enter a new Room \n" + hints.getText();
+      String allOfTheHints = "You enter a new Room \n";
       ToggleBox<String> hinters = curPlayer.curRoom.hintAtPlayer();
-      for(int i=0; i< hinters.length;i++){
+      for(int i=0; i<4;i++){
         if(hinters.getIndex(i) != null){
           allOfTheHints = hinters.getIndex(i) + "\n" + allOfTheHints;
+          System.out.println(hinters.getIndex(i));
         }
       }
       

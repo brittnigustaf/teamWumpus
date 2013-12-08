@@ -25,6 +25,7 @@ public class Dwarf {
     protected int numPlayers;
     protected int row;
     protected int col;
+    private boolean bug = true;
     ImageList images = new ImageList();
     
 
@@ -70,7 +71,7 @@ public class Dwarf {
       
       col = 8;
       row = 8;
-      inLine = "E,F,E,K,1F,L,2L,L,B,J,A,A,I,E,K,F,E,F,D,B,C,H,C,D,B,A,C,L,E,C,L,D,E,J,K,F,B,G,K,I,H,K,J,A,G,OWK,J,C,D,D,L,B,F,H,K,F,B,J,G,G,J,C,B,C,";
+      inLine = "E,F,E,K,1F,L,2L,L,B,J,A,A,I,E,K,F,E,F,D,B,C,H,C,D,WB,A,C,L,E,C,L,D,E,J,K,F,B,G,K,I,H,K,J,AP,G,OK,J,C,D,D,L,B,F,H,K,F,B,J,G,G,J,C,B,C,";
       init(inList);
     }
     
@@ -255,8 +256,9 @@ public class Dwarf {
     }
     
     private void debug(String output, int cor[]){
-      
-      System.out.println("at " + cor[0] + ", " + cor[1] + " it is a: " + output);
+      if(bug){
+        System.out.println("at " + cor[0] + ", " + cor[1] + " it is a: " + output);
+      }
     }
     
     private int[] getCordinate(int i){
