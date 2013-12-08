@@ -114,7 +114,7 @@ public class ImageList {
     }
     
     BufferedImage BAT_resized = resize(BAT_img, 100, 75);
-    BufferedImage WUMPUS_resized = resize(WUMPUS_img, 100, 75);
+    BufferedImage WUMPUS_resized = resize(WUMPUS_img, 300, 225);
     BufferedImage PIT_resized = resize(PIT_img, 100, 75);
     
     BAT = new ImageIcon(BAT_resized); 

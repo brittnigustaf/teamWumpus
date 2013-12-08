@@ -105,20 +105,24 @@ public class MainMenuFrame extends JFrame {
         
         middleButtonLayout.setVgap(25);
         buttonLayout.setVgap(25);
+        centerLayout.setVgap(15);
         
-        centerLayout.setVgap(150);
         ImageIcon wumpusIcon = null;
+        ImageList images = new ImageList();
         try{        
-            wumpusIcon = new ImageIcon(getClass().getResource("wumpus.jpg"));
-            titleImage.setIcon(wumpusIcon);
+            wumpusIcon = images.WUMPUS;
         }catch(Exception e){
             System.out.println("can't find image: " + e);
         }
 
-         
+        titleImage = new JLabel();
+        titleImage.setIcon(wumpusIcon);
+        northPane.add(titleImage);
+
         centerPane.add(buttonPane);
-        //northPane.add(titleImage);
         pane.add(centerPane, BorderLayout.CENTER);
+        pane.add(northPane, BorderLayout.NORTH);
+
         
         setVisible(true); // display this frame
     }

@@ -12,7 +12,7 @@ public class BaseFrame extends JFrame {
     BaseFrame(){
         super();
         setBounds(0,0,0,0);
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container con = this.getContentPane(); // inherit main frame
         con.add(pane); // add the panel to frame
         MainMenuFrame StartGame =  new MainMenuFrame();
