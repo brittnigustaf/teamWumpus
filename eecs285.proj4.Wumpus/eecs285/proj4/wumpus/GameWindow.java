@@ -158,7 +158,7 @@ public class GameWindow extends JFrame {
         JPanel playerInfo = new JPanel(new GridLayout(2,1));
         
         //Initialize player (FOR DEBUGGING!)
-        players[0] = new Player(1, roomMap[5][3], roomMap[5][3].panel.getLocation());
+        //players[0] = new Player(1, roomMap[5][3], roomMap[5][3].panel.getLocation());
         
         int i = 0;
         playerScore = new ArrayList<JLabel>();
@@ -270,18 +270,24 @@ public class GameWindow extends JFrame {
       curPlayer.curRoom.reveal();
       event();
       nextPlayer();
+      hint();
+      validMoves();
+      
+      
+    }
+    
+    void hint(){
+      //EFF: prints hints to user screen
       
       String allOfTheHints = "\n" + "You enter a new Room \n" + hints.getText();
       ToggleBox<String> hinters = curPlayer.curRoom.hintAtPlayer();
       for(int i=0; i< hinters.length;i++){
-        allOfTheHints = hinters.getIndex(i) + "\n" + allOfTheHints;
+        if(hinters.getIndex(i) != null){
+          allOfTheHints = hinters.getIndex(i) + "\n" + allOfTheHints;
+        }
       }
       
       hints.setText(allOfTheHints);
-      
-      validMoves();
-      
-      
     }
     
     void nextPlayer(){
