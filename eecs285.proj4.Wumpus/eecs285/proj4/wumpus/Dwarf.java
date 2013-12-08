@@ -107,6 +107,7 @@ public class Dwarf {
       Codex codex = new Codex();
 
       if(plans[i].equals(codex.CROSS)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].add(images.CROSS);
         connect(cor, "north");
         connect(cor, "east");
@@ -115,42 +116,49 @@ public class Dwarf {
       }
       
       if(plans[i].equals(codex.UP_RIGHT)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].add(images.UP_RIGHT);
         connect(cor, "north");
         connect(cor, "east");
       }
       
       if(plans[i].equals(codex.UP_LEFT)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].add(images.UP_LEFT);
         connect(cor, "north");
         connect(cor, "west");
       }
       
       if(plans[i].equals(codex.UP_DOWN)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].add(images.UP_DOWN);
         connect(cor, "north");
         connect(cor, "south");
       }
       
       if(plans[i].equals(codex.DOWN_RIGHT)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].add(images.DOWN_RIGHT);
         connect(cor, "south");
         connect(cor, "east");
       }
       
       if(plans[i].equals(codex.DOWN_LEFT)){
-        dungeon[cor[0]][cor[1]].add(images.DOWN_RIGHT);
+        debug(plans[i], cor);
+        dungeon[cor[0]][cor[1]].add(images.DOWN_LEFT);
         connect(cor, "south");
         connect(cor, "west");
       }
       
       if(plans[i].equals(codex.LEFT_RIGHT)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].add(images.LEFT_RIGHT);
         connect(cor, "west");
         connect(cor, "east");
       }
       
       if(plans[i].equals(codex.T_RIGHT)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].add(images.T_RIGHT);
         connect(cor, "north");
         connect(cor, "east");
@@ -158,6 +166,7 @@ public class Dwarf {
       }
       
       if(plans[i].equals(codex.T_LEFT)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].add(images.T_LEFT);
         connect(cor, "north");
         connect(cor, "west");
@@ -165,6 +174,7 @@ public class Dwarf {
       }
       
       if(plans[i].equals(codex.T_UP)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].add(images.T_UP);
         connect(cor, "north");
         connect(cor, "west");
@@ -172,6 +182,7 @@ public class Dwarf {
       }
       
       if(plans[i].equals(codex.T_DOWN)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].add(images.T_DOWN);
         connect(cor, "south");
         connect(cor, "west");
@@ -179,22 +190,27 @@ public class Dwarf {
       }
       
       if(plans[i].equals(codex.PITFALL)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].addTrap(new Pitfall(dungeon[cor[0]][cor[1]]));
       }
         
       if(plans[i].equals(codex.BATS)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].addTrap(new Bats(dungeon[cor[0]][cor[1]]));
       }
         
       if(plans[i].equals(codex.WUMPUS)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].addWumpus(new Wumpus(dungeon[cor[0]][cor[1]]));
       }
       
       if(plans[i].equals(codex.GOLD)){
+        debug(plans[i], cor);
         dungeon[cor[0]][cor[1]].addTrap(new Gold(dungeon[cor[0]][cor[1]]));
       }
       
       if(plans[i].equals(codex.PLAYER1)){
+        debug(plans[i], cor);
         Point cordinate = new Point(cor[0], cor[1]);
         playerList[0].setLocation(cordinate);
         playerList[0].setRoom(dungeon[cor[0]][cor[1]]);
@@ -202,6 +218,7 @@ public class Dwarf {
       
       if(plans[i].equals(codex.PLAYER2)){
         if(numPlayers==2){
+          debug(plans[i], cor);
           Point cordinate = new Point(cor[0], cor[1]);
           playerList[1].setLocation(cordinate);
           playerList[1].setRoom(dungeon[cor[0]][cor[1]]);
@@ -235,6 +252,11 @@ public class Dwarf {
       }
       
       return cor;
+    }
+    
+    private void debug(String output, int cor[]){
+      
+      System.out.println("at " + cor[0] + ", " + cor[1] + " it is a: " + output);
     }
     
     private int[] getCordinate(int i){

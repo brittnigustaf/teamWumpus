@@ -56,17 +56,17 @@ public class ImageList {
     BufferedImage EMPTY_img = null;
     
     try {
-      CROSS_img = ImageIO.read(new File("images/cross_tile.png"));
-      UP_RIGHT_img = ImageIO.read(new File("images/en_tile.png"));
-      UP_LEFT_img = ImageIO.read(new File("images/wn_tile.png"));
-      UP_DOWN_img = ImageIO.read(new File("images/ns_tile.png"));
-      DOWN_RIGHT_img = ImageIO.read(new File("images/es_tile.png"));
-      DOWN_LEFT_img = ImageIO.read(new File("images/ws_tile.png"));
-      LEFT_RIGHT_img = ImageIO.read(new File("images/ew_tile.png"));
-      T_RIGHT_img = ImageIO.read(new File("images/nes_tile.png"));
-      T_LEFT_img = ImageIO.read(new File("images/nsw_tile.png"));
-      T_UP_img = ImageIO.read(new File("images/new_tile.png"));
-      T_DOWN_img = ImageIO.read(new File("images/esw_tile.png"));
+      CROSS_img = ImageIO.read(new File("images/CROSS.jpg"));
+      UP_RIGHT_img = ImageIO.read(new File("images/UP_RIGHT.jpg"));
+      UP_LEFT_img = ImageIO.read(new File("images/UP_LEFT.jpg"));
+      UP_DOWN_img = ImageIO.read(new File("images/UP_DOWN.jpg"));
+      DOWN_RIGHT_img = ImageIO.read(new File("images/DOWN_RIGHT.jpg"));
+      DOWN_LEFT_img = ImageIO.read(new File("images/DOWN_LEFT.jpg"));
+      LEFT_RIGHT_img = ImageIO.read(new File("images/LEFT_RIGHT.jpg"));
+      T_RIGHT_img = ImageIO.read(new File("images/RIGHT_T.jpg"));
+      T_LEFT_img = ImageIO.read(new File("images/LEFT_T.jpg"));
+      T_UP_img = ImageIO.read(new File("images/UP_T.jpg"));
+      T_DOWN_img = ImageIO.read(new File("images/DOWN_T.jpg"));
       EMPTY_img = ImageIO.read(new File("images/empty_tile.png"));
     } 
     catch (IOException e) {
@@ -167,18 +167,18 @@ public class ImageList {
     BufferedImage EMPTY_img = null;
     
     try {
-      CROSS_img = ImageIO.read(new File("images/cross_tile.png"));
-      UP_RIGHT_img = ImageIO.read(new File("images/en_tile.png"));
-      UP_LEFT_img = ImageIO.read(new File("images/wn_tile.png"));
-      UP_DOWN_img = ImageIO.read(new File("images/ns_tile.png"));
-      DOWN_RIGHT_img = ImageIO.read(new File("images/es_tile.png"));
-      DOWN_LEFT_img = ImageIO.read(new File("images/ws_tile.png"));
-      LEFT_RIGHT_img = ImageIO.read(new File("images/ew_tile.png"));
-      T_RIGHT_img = ImageIO.read(new File("images/nes_tile.png"));
-      T_LEFT_img = ImageIO.read(new File("images/nsw_tile.png"));
-      T_UP_img = ImageIO.read(new File("images/new_tile.png"));
-      T_DOWN_img = ImageIO.read(new File("images/esw_tile.png"));
-      EMPTY_img = ImageIO.read(new File("images/empty_tile.png"));
+        CROSS_img = ImageIO.read(new File("images/CROSS.jpg"));
+        UP_RIGHT_img = ImageIO.read(new File("images/UP_RIGHT.jpg"));
+        UP_LEFT_img = ImageIO.read(new File("images/UP_LEFT.jpg"));
+        UP_DOWN_img = ImageIO.read(new File("images/UP_DOWN.jpg"));
+        DOWN_RIGHT_img = ImageIO.read(new File("images/DOWN_RIGHT.jpg"));
+        DOWN_LEFT_img = ImageIO.read(new File("images/DOWN_LEFT.jpg"));
+        LEFT_RIGHT_img = ImageIO.read(new File("images/LEFT_RIGHT.jpg"));
+        T_RIGHT_img = ImageIO.read(new File("images/RIGHT_T.jpg"));
+        T_LEFT_img = ImageIO.read(new File("images/LEFT_T.jpg"));
+        T_UP_img = ImageIO.read(new File("images/UP_T.jpg"));
+        T_DOWN_img = ImageIO.read(new File("images/DOWN_T.jpg"));
+        EMPTY_img = ImageIO.read(new File("images/empty_tile.png"));
     } 
     catch (IOException e) {
       e.printStackTrace();

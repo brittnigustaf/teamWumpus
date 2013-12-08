@@ -2,12 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Julian/Desktop/eclipse/lib/commons-codec-1.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Julian/Desktop/eclipse/lib/commons-logging-1.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Julian/Desktop/eclipse/lib/fluent-hc-4.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Julian/Desktop/eclipse/lib/httpclient-4.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Julian/Desktop/eclipse/lib/httpclient-cache-4.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Julian/Desktop/eclipse/lib/httpcore-4.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Julian/Desktop/eclipse/lib/httpmime-4.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Luke/ExtraJars/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Luke/ExtraJars/lib/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Luke/ExtraJars/lib/fluent-hc-4.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Luke/ExtraJars/lib/httpclient-4.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Luke/ExtraJars/lib/httpclient-cache-4.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Luke/ExtraJars/lib/httpcore-4.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Luke/ExtraJars/lib/httpmime-4.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
