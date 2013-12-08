@@ -139,7 +139,7 @@ public class Dwarf {
       }
       
       if(plans[i].equals(codex.DOWN_LEFT)){
-        dungeon[cor[0]][cor[1]].add(images.DOWN_RIGHT);
+        dungeon[cor[0]][cor[1]].add(images.DOWN_LEFT);
         connect(cor, "south");
         connect(cor, "west");
       }
