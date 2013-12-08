@@ -344,8 +344,8 @@ public class GameWindow extends JFrame {
       
       if(validDoors[dir.north]) northButton.setVisible(true);
       if(validDoors[dir.south]) southButton.setVisible(true);
-      if(validDoors[dir.east]) westButton.setVisible(true);
-      if(validDoors[dir.west]) eastButton.setVisible(true);
+      if(validDoors[dir.west]) westButton.setVisible(true);
+      if(validDoors[dir.east]) eastButton.setVisible(true);
       
     }
     
@@ -363,6 +363,8 @@ public class GameWindow extends JFrame {
           curPlayer.move(2, curPlayer.curRoom.move("south"), curPlayer.curRoom.move("south").panel.getLocation());
         else if (desc.equals(images.westArrow.getDescription()))
           curPlayer.move(3, curPlayer.curRoom.move("west"), curPlayer.curRoom.move("west").panel.getLocation());
+        
+        step();
       }
     }
   }
