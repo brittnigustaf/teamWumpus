@@ -251,8 +251,8 @@ public class GameWindow extends JFrame {
         window.setVisible(true);
         for(Player pl: players){
         	pl.curRoom.reveal();
-
         }
+        validMoves();
        
     }
     
@@ -263,8 +263,11 @@ public class GameWindow extends JFrame {
     
     void step(){
     	curPlayer.curRoom.reveal();
-        event();
-        nextPlayer();        
+      event();
+      nextPlayer();
+      validMoves();
+      
+      
     }
     
     void nextPlayer(){
@@ -326,6 +329,24 @@ public class GameWindow extends JFrame {
         		}
     		}
     	}
+    }
+    
+    void validMoves(){
+      //EFF: checks for valid moves for the player
+      
+      Boolean validDoors[] = curPlayer.curRoom.checkRoom();
+      Directions dir = new Directions();
+      
+      northButton.setVisible(false);
+      southButton.setVisible(false);
+      westButton.setVisible(false);
+      eastButton.setVisible(false);
+      
+      if(validDoors[dir.north]) northButton.setVisible(true);
+      if(validDoors[dir.south]) southButton.setVisible(true);
+      if(validDoors[dir.east]) westButton.setVisible(true);
+      if(validDoors[dir.west]) eastButton.setVisible(true);
+      
     }
     
     public class ButtonListener implements ActionListener
