@@ -6,6 +6,7 @@ public class goWumpus {
         new BaseFrame();
         //MapMaker map = new MapMaker();
         //map.makeMap(8,8,1,2);
+      //new dummyGo();
     }
 
 }
