@@ -22,6 +22,9 @@ public class dummyGo {
     playerList[0] = player;
     Urist = new Dwarf(playerList);
     
+    System.out.println(Urist.row);
+    System.out.println(Urist.col);
+    
     for(int i=0;i<Urist.row;i++){
       for(int j=0; j<Urist.col;j++){
         Urist.dungeon[i][j].reveal();

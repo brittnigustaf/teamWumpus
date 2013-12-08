@@ -63,10 +63,10 @@ public class ImageList {
       DOWN_RIGHT_img = ImageIO.read(new File("images/DOWN_RIGHT.jpg"));
       DOWN_LEFT_img = ImageIO.read(new File("images/DOWN_LEFT.jpg"));
       LEFT_RIGHT_img = ImageIO.read(new File("images/LEFT_RIGHT.jpg"));
-      T_RIGHT_img = ImageIO.read(new File("images/RIGHT_T.jpg"));
-      T_LEFT_img = ImageIO.read(new File("images/LEFT_T.jpg"));
-      T_UP_img = ImageIO.read(new File("images/UP_T.jpg"));
-      T_DOWN_img = ImageIO.read(new File("images/DOWN_T.jpg"));
+      T_RIGHT_img = ImageIO.read(new File("images/T_RIGHT.jpg"));
+      T_LEFT_img = ImageIO.read(new File("images/T_LEFT.jpg"));
+      T_UP_img = ImageIO.read(new File("images/T_UP.jpg"));
+      T_DOWN_img = ImageIO.read(new File("images/T_DOWN.jpg"));
       EMPTY_img = ImageIO.read(new File("images/empty_tile.png"));
     } 
     catch (IOException e) {
@@ -128,11 +128,11 @@ public class ImageList {
     BufferedImage westArrow_img = null;
     
     try {
-      northArrow_img = ImageIO.read(new File("images/arrows/north_arrow.png"));//, "northImg"));
-      eastArrow_img = ImageIO.read(new File("images/arrows/east_arrow.png"));//, "eastImg"));
-      southArrow_img = ImageIO.read(new File("images/arrows/south_arrow.png"));//, "southImg"));
-      westArrow_img = ImageIO.read(new File("images/arrows/west_arrow.png"));//, "westImg"));
-    } 
+    northArrow_img = ImageIO.read(new File("images/arrows/north_arrow.png"));
+    eastArrow_img = ImageIO.read(new File("images/arrows/east_arrow.png"));
+    southArrow_img = ImageIO.read(new File("images/arrows/south_arrow.png"));
+    westArrow_img = ImageIO.read(new File("images/arrows/west_arrow.png"));
+  } 
     catch (IOException e) {
       e.printStackTrace();
     }
@@ -142,10 +142,10 @@ public class ImageList {
     BufferedImage southArrow_resized = resize(southArrow_img, 40, 40);
     BufferedImage westArrow_resized = resize(westArrow_img, 40, 40);
     
-    northArrow = new ImageIcon(northArrow_resized); 
-    eastArrow = new ImageIcon(eastArrow_resized);
-    southArrow = new ImageIcon(southArrow_resized);
-    westArrow = new ImageIcon(westArrow_resized);
+    northArrow = new ImageIcon(northArrow_resized, "northImg"); 
+    eastArrow = new ImageIcon(eastArrow_resized, "eastImg");
+    southArrow = new ImageIcon(southArrow_resized, "southImg");
+    westArrow = new ImageIcon(westArrow_resized, "westImg");
        
    }
   
@@ -253,10 +253,10 @@ public class ImageList {
     BufferedImage southArrow_resized = resize(southArrow_img, 40, 40);
     BufferedImage westArrow_resized = resize(westArrow_img, 40, 40);
     
-    northArrow = new ImageIcon(northArrow_resized); 
-    eastArrow = new ImageIcon(eastArrow_resized);
-    southArrow = new ImageIcon(southArrow_resized);
-    westArrow = new ImageIcon(westArrow_resized);
+    northArrow = new ImageIcon(northArrow_resized, "northImg"); 
+    eastArrow = new ImageIcon(eastArrow_resized, "eastImg");
+    southArrow = new ImageIcon(southArrow_resized, "southImg");
+    westArrow = new ImageIcon(westArrow_resized, "westImg");
       
   }
   
