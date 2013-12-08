@@ -27,7 +27,6 @@ public class dummyGo {
     
     for(int i=0;i<Urist.row;i++){
       for(int j=0; j<Urist.col;j++){
-        System.out.println("row: " + i + " col: " + j);
         Urist.dungeon[i][j].reveal();
         board.add(Urist.dungeon[i][j].panel);
       }
