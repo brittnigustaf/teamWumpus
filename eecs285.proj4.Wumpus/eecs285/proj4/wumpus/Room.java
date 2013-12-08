@@ -94,101 +94,106 @@ public class Room {
   return wumpus.callHint();
   }
   
-  ToggleBox<String> hintAtPlayer(){
-    //EFF: returns a string ToggleBox with the hints from the room
-    //     The problem is I don't know how the player will recieve this yet.
-    
-    Room knockknock;
-    String events[] = new String[8];
-    boolean mesh[] = new boolean[8];
-    for(int i=0; i<8;i++) mesh[i] = true;
-    
-    for (int i=0; i<4; i++){
-      knockknock = doors[i];
-      if(knockknock != null){
-        if(knockknock.trap != null){
-          events[i] = doors[i].revealTrap();
+  String hintAtPlayer(){
+      //EFF: returns a string ToggleBox with the hints from the room
+      //     The problem is I don't know how the player will recieve this yet.
+      
+      Room knockknock;
+      String events[] = new String[8];
+      boolean mesh[] = new boolean[8];
+      for(int i=0; i<8;i++) mesh[i] = true;
+      
+      for (int i=0; i<4; i++){
+        knockknock = doors[i];
+        if(knockknock != null){
+          if(knockknock.trap != null){
+            events[i] = doors[i].revealTrap();
+          }
+          else{
+            events[i] = "";
+            mesh[i] = false;
+          }
         }
-        else{
-          events[i] = "";
-          mesh[i] = false;
-        }
-      }
-      else {
-        events[i] = "";
-        mesh[i] = false;
-      }
-    }
-    
-    //compare index 0 to all
-    if(events[0].equals(events[1])){
-      mesh[0] = false;
-    }
-    if(events[0].equals(events[2])){
-      mesh[0] = false;
-    }
-    if(events[0].equals(events[3])){
-      mesh[0] = false;
-    }
-    
-    //compares index 1 to 2 and 3
-    if(events[1].equals(events[2])){
-      mesh[1] = false;
-    }
-    if(events[1].equals(events[3])){
-      mesh[1] = false;
-    }
-    
-    //compare index 2 to 3
-    if(events[2].equals(events[3])){
-      mesh[2] = false;
-    }
-    
-    //deals with the wumpus
-    for (int i=4; i<8; i++){
-      knockknock = doors[i-4];
-      if(knockknock != null){
-        if(knockknock.trap != null) events[i] = doors[i-4].checkStench();
         else {
           events[i] = "";
           mesh[i] = false;
         }
       }
-      else {
-        events[i] = "";
-        mesh[i] = false;
+      
+      //compare index 0 to all
+      if(events[0].equals(events[1])){
+        mesh[0] = false;
+      }
+      if(events[0].equals(events[2])){
+        mesh[0] = false;
+      }
+      if(events[0].equals(events[3])){
+        mesh[0] = false;
+      }
+      
+      //compares index 1 to 2 and 3
+      if(events[1].equals(events[2])){
+        mesh[1] = false;
+      }
+      if(events[1].equals(events[3])){
+        mesh[1] = false;
+      }
+      
+      //compare index 2 to 3
+      if(events[2].equals(events[3])){
+        mesh[2] = false;
+      }
+      
+      //deals with the wumpus
+      for (int i=4; i<8; i++){
+        knockknock = doors[i-4];
+        if(knockknock != null){
+          if(knockknock.wumpus != null) events[i] = doors[i-4].checkStench();
+          else {
+            events[i] = "";
+            mesh[i] = false;
+          }
+        }
+        else {
+          events[i] = "";
+          mesh[i] = false;
+         }
        }
-     }
-    
-  //compare index 0 to all
-    if(events[4].equals(events[5])){
-      mesh[4] = false;
+      
+    //compare index 0 to all
+      if(events[4].equals(events[5])){
+        mesh[4] = false;
+      }
+      if(events[4].equals(events[6])){
+        mesh[4] = false;
+      }
+      if(events[4].equals(events[7])){
+        mesh[4] = false;
+      }
+      
+      //compares index 1 to 2 and 3
+      if(events[5].equals(events[6])){
+        mesh[5] = false;
+      }
+      if(events[5].equals(events[7])){
+        mesh[5] = false;
+      }
+      
+      //compare index 2 to 3
+      if(events[6].equals(events[7])){
+        mesh[6] = false;
+      }
+      
+      String lines = "";
+      for(int i=0;i<8;i++){
+        if(mesh[i]){
+          lines = lines + events[i] + "\n";
+        }
+      }
+      
+      return lines;
+      
     }
-    if(events[4].equals(events[6])){
-      mesh[4] = false;
-    }
-    if(events[4].equals(events[7])){
-      mesh[4] = false;
-    }
-    
-    //compares index 1 to 2 and 3
-    if(events[5].equals(events[6])){
-      mesh[5] = false;
-    }
-    if(events[5].equals(events[7])){
-      mesh[5] = false;
-    }
-    
-    //compare index 2 to 3
-    if(events[6].equals(events[7])){
-      mesh[6] = false;
-    }
-    
-    ToggleBox<String> eventCall = new ToggleBox<String> (events, mesh);
-    
-    return eventCall;
-    
-  }
   
   Boolean[] checkRoom(){
     //EFF: returns a boolean array for valid moves
@@ -206,6 +211,7 @@ public class Room {
     
     return valid;
   }
+}
   
 
-}
+

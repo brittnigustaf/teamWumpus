@@ -25,6 +25,7 @@ public class Dwarf {
     protected int numPlayers;
     protected int row;
     protected int col;
+    private boolean bug = false;
     ImageList images = new ImageList();
     
 
@@ -78,6 +79,7 @@ public class Dwarf {
               + "H,K,J,A,G,OWK,J,C,"
               + "D,D,L,B,F,H,K,F,"
               + "B,J,G,G,J,C,B,C,";
+
       init(inList);
     }
     
@@ -261,9 +263,9 @@ public class Dwarf {
       return cor;
     }
     
-    private void debug(String output, int cor[]){
-      
+    private void debug(String output, int cor[]){      
       //System.out.println("at " + cor[0] + ", " + cor[1] + " it is a: " + output);
+
     }
     
     private int[] getCordinate(int i){
