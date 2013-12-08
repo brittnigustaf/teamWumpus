@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -52,6 +53,7 @@ public class GameWindow extends JFrame {
     FlowLayout informationLayout = new FlowLayout();
     GridLayout optionLayout = new GridLayout(3,1);
     FlowLayout infoLayout = new FlowLayout();
+    JTextArea hints;
 
     
     JPanel optionPane = new JPanel(optionLayout);
@@ -129,6 +131,9 @@ public class GameWindow extends JFrame {
         //fill Info with status icons
         infoPane.setPreferredSize(new Dimension(1200,200));
         infoPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        hints = new JTextArea();
+        hints.setText("Welcome to the Dungeon!!");
+        infoPane.add(hints);
 
        
         //fill options with desired options
@@ -262,9 +267,18 @@ public class GameWindow extends JFrame {
     }
     
     void step(){
-    	curPlayer.curRoom.reveal();
+      curPlayer.curRoom.reveal();
       event();
       nextPlayer();
+      
+      String allOfTheHints = "\n" + "You enter a new Room \n" + hints.getText();
+      ToggleBox<String> hinters = curPlayer.curRoom.hintAtPlayer();
+      for(int i=0; i< hinters.length;i++){
+        allOfTheHints = hinters.getIndex(i) + "\n" + allOfTheHints;
+      }
+      
+      hints.setText(allOfTheHints);
+      
       validMoves();
       
       
