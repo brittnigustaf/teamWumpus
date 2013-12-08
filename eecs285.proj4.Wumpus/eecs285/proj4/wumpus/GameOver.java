@@ -1,6 +1,7 @@
 package eecs285.proj4.wumpus;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -47,11 +48,16 @@ public class GameOver {
   JButton no;
   JTextField nameField;
   
+  
+  JPanel announcePane = new JPanel(new FlowLayout());  
   JPanel top;
   JPanel bot;
   
   JPanel submitScreen;
   FlowLayout submitLayout;
+  JPanel questionPane = new JPanel(new FlowLayout());
+  JPanel namePane = new JPanel(new FlowLayout());
+
   
   gameSubmit submit;
   gameEnder end;
@@ -63,7 +69,7 @@ public class GameOver {
 	Score = inScore;
     
 	announce = new JLabel(eventName);
-    question = new JLabel("Would you like to submit score?");
+    question = new JLabel("Would you like to submit your score?");
     
     nameLabel = new JLabel("Player Name");
     nameField = new JTextField();
@@ -74,11 +80,12 @@ public class GameOver {
     end = new gameEnder();
     submit = new gameSubmit();
     
-    yes.addMouseListener(end);
-    no.addMouseListener(submit);
+    yes.addMouseListener(submit);
+    no.addMouseListener(end);
     
     over = new JFrame("Game Over");
     over.setLayout(new BorderLayout());
+    over.setPreferredSize(new Dimension(500, 175));
     formWindow();
     
     over.setVisible(true);
@@ -87,33 +94,27 @@ public class GameOver {
   void formWindow(){
     //EFF: adds all components to JPannels and then JFrame
     //MOD: top, bot, over
-	  
-	top = new JPanel(new GridLayout(3,5));
-	bot = new JPanel(new GridLayout(1,5));
     
-    top.add(new JLabel(""));
-    top.add(new JLabel(""));
-    top.add(announce);
-    top.add(new JLabel(""));
-    top.add(new JLabel(""));
     
-    top.add(new JLabel(""));
-    top.add(new JLabel(""));
-    top.add(question);
-    top.add(new JLabel(""));
-    top.add(new JLabel(""));
+	top = new JPanel(new BorderLayout());
+	bot = new JPanel(new FlowLayout());
     
-    top.add(new JLabel(""));
-    top.add(nameLabel);
-    top.add(new JLabel(""));
-    top.add(nameField);
-    top.add(new JLabel(""));
+	announcePane.add(announce);
+    top.add(announcePane, BorderLayout.NORTH);
     
-    bot.add(new JLabel(""));
+    questionPane.add(question);
+    top.add(questionPane, BorderLayout.CENTER);
+        
+    ((FlowLayout) namePane.getLayout()).setHgap(25);
+    nameField.setPreferredSize(new Dimension(100, 25));
+    namePane.add(nameLabel);
+    namePane.add(nameField);
+    
+    top.add(namePane, BorderLayout.SOUTH);
+    
+    
     bot.add(yes);
-    bot.add(new JLabel(""));
     bot.add(no);
-    bot.add(new JLabel(""));
     
     over.add(top, BorderLayout.NORTH);
     over.add(bot, BorderLayout.SOUTH);
@@ -136,40 +137,47 @@ public class GameOver {
  
 		try {
 			post.setEntity(new UrlEncodedFormEntity(urlParameters));
-		} catch (UnsupportedEncodingException e1) {
+		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		String subText;
+		String subText = "";
 		try {
 			client.execute(post);
 			subText = "Score Submitted!";
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (Exception e1) {
+			//e1.printStackTrace();
 			subText = "Something went wrong... sorry!";
 
 		}
-		
-		
-		submitScreen = new JPanel();
-		
-		JLabel subLabel = new JLabel();
-		subLabel.setText(subText);
-		JButton endBtn = new JButton();
-		
-		endBtn.setText("OK");
-	    endBtn.addMouseListener(end);
-		
-		submitScreen.setLayout(new BorderLayout());
-		
-		submitScreen.add(subLabel, BorderLayout.NORTH);
-		submitScreen.add(endBtn,BorderLayout.SOUTH);
-		
-		
-		over.removeAll();
-		over.setLayout(new BorderLayout());
-		over.add(submitScreen);
-       
+		finally{
+    		submitScreen = new JPanel();
+    		
+    		//JLabel subLabel = new JLabel();
+    		announce.setText(subText);
+    		top.remove(questionPane);
+    		top.remove(namePane);
+    		bot.remove(yes);
+    		bot.remove(no);
+    		JButton endBtn = new JButton();
+    		
+    		endBtn.setText("OK");
+    	    endBtn.addMouseListener(end);
+    	    endBtn.setPreferredSize(new Dimension(100,25));
+    		
+            //submitScreen.removeAll();
+    		//submitScreen.setLayout(new BorderLayout());
+    		//submitScreen.add(subLabel, BorderLayout.NORTH);
+    	    bot.setLayout(new BorderLayout());
+    	    JPanel flowPanel = new JPanel(new FlowLayout());
+    	    flowPanel.add(endBtn);
+    	    bot.add(BorderLayout.CENTER, flowPanel);
+
+    		
+    		
+    		//over.add(submitScreen, BorderLayout.CENTER);
+    		over.repaint();
+		}
     }
     
   }

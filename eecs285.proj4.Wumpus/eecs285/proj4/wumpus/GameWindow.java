@@ -297,7 +297,7 @@ public class GameWindow extends JFrame {
     			new GameOver(score, "Player " + name + " was eaten by the Wumpus");
     		}
     	}
-    	if(trip !=null){
+    	else if(trip !=null){
     		if(trip instanceof Gold){
     			int score = curPlayer.score;
     			int moves = curPlayer.numMoves;
