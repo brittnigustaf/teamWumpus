@@ -51,15 +51,15 @@ public class Room {
   }
   
   void addEmpty(ImageIcon inImage){
-	  
-	empty = inImage;
-	roomImage = new JLabel(image);
-	panel.add(roomImage);
-	panel.setBorder(blackBorder);
+    
+  empty = inImage;
+  roomImage = new JLabel(image);
+  panel.add(roomImage);
+  panel.setBorder(blackBorder);
   }
   
   void reveal(){
-	  roomImage.setIcon(image);
+    roomImage.setIcon(image);
   }
   
   void addTrap(final Trap inTrap){
@@ -105,7 +105,15 @@ public class Room {
     
     for (int i=0; i<4; i++){
       knockknock = doors[i];
-      if(knockknock != null) events[i] = doors[i].revealTrap();
+      if(knockknock != null){
+        if(knockknock.trap != null){
+          events[i] = doors[i].revealTrap();
+        }
+        else{
+          events[i] = "";
+          mesh[i] = false;
+        }
+      }
       else {
         events[i] = "";
         mesh[i] = false;
@@ -138,8 +146,14 @@ public class Room {
     
     //deals with the wumpus
     for (int i=4; i<8; i++){
-      knockknock = doors[i];
-      if(knockknock != null) events[i] = doors[i].checkStench();
+      knockknock = doors[i-4];
+      if(knockknock != null){
+        if(knockknock.trap != null) events[i] = doors[i-4].checkStench();
+        else {
+          events[i] = "";
+          mesh[i] = false;
+        }
+      }
       else {
         events[i] = "";
         mesh[i] = false;
