@@ -7,11 +7,13 @@ package eecs285.proj4.wumpus;
  */
 
 public class Wumpus extends Trap{
+   ImageList images = new ImageList();
+
   
   Wumpus(Room inRoom){
     //EFF: creates an instance of wumpus
-    
     super(inRoom);
+    image = images.WUMPUS;
   }
 
   

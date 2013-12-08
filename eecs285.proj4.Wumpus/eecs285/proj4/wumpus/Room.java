@@ -46,8 +46,8 @@ public class Room {
   
   void add(ImageIcon inImage){
     //EFF: adds the image to the room
-    
-    image = inImage;
+    if(trap == null)
+        image = inImage;
   }
   
   void addEmpty(ImageIcon inImage){
@@ -65,14 +65,14 @@ public class Room {
   void addTrap(final Trap inTrap){
     //EFF: adds trap to room
     //MOD: trap
-    
+    image = inTrap.image;
     trap = inTrap;
   }
   
   void addWumpus(final Wumpus inWump){
   //EFF: adds the wumpus to the room
   //MOD: wumpus
-  
+  image = inWump.image;
   wumpus = inWump;
   }
   
