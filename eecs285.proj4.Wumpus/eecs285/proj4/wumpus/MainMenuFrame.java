@@ -110,7 +110,7 @@ public class MainMenuFrame extends JFrame {
         ImageIcon wumpusIcon = null;
         ImageList images = new ImageList();
         try{        
-            wumpusIcon = images.WUMPUS;
+            wumpusIcon = images.BIG_WUMPUS;
         }catch(Exception e){
             System.out.println("can't find image: " + e);
         }

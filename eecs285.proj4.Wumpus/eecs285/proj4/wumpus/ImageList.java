@@ -30,6 +30,7 @@ public class ImageList {
   //Trap Members
   static ImageIcon BAT;
   static ImageIcon WUMPUS;
+  static ImageIcon BIG_WUMPUS;
   static ImageIcon PIT;
   
   //GUI Image Members
@@ -114,10 +115,12 @@ public class ImageList {
     }
     
     BufferedImage BAT_resized = resize(BAT_img, 100, 75);
-    BufferedImage WUMPUS_resized = resize(WUMPUS_img, 300, 225);
+    BufferedImage BIG_WUMPUS_resized = resize(WUMPUS_img, 300, 225);
+    BufferedImage WUMPUS_resized = resize(WUMPUS_img, 100, 75);
     BufferedImage PIT_resized = resize(PIT_img, 100, 75);
     
     BAT = new ImageIcon(BAT_resized); 
+    BIG_WUMPUS = new ImageIcon(BIG_WUMPUS_resized);
     WUMPUS = new ImageIcon(WUMPUS_resized);
     PIT = new ImageIcon(PIT_resized);
     
