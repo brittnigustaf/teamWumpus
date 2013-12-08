@@ -79,6 +79,7 @@ public class GameWindow extends JFrame {
     Border blackBorder;
     
     private ButtonListener actionListener;
+    private ModeListener modeListener;
     private int moveDir;
     
     GameWindow(ScoreWindow inScore)
@@ -229,11 +230,12 @@ public class GameWindow extends JFrame {
         dirPanel.add(new JLabel());
         
         actionListener = new ButtonListener();
+        modeListener = new ModeListener();
         northButton.addActionListener(actionListener);
         westButton.addActionListener(actionListener);
         eastButton.addActionListener(actionListener);
         southButton.addActionListener(actionListener);
-        //e.addActionListener(actionListener);
+        changeMode.addActionListener(modeListener);
 
         //Add direction panel titled border
         dirPanTitle = BorderFactory.createTitledBorder("Move Directions");
@@ -271,6 +273,12 @@ public class GameWindow extends JFrame {
       event();
       nextPlayer();
       hint();
+      
+      if (fireMode)
+        changeMode.setText("Change to Movement Mode");
+      else
+        changeMode.setText("Change to Fire Mode");
+      
       validMoves();
       
       
@@ -363,21 +371,65 @@ public class GameWindow extends JFrame {
       
     }
     
+    
     public class ButtonListener implements ActionListener
     {
       public void actionPerformed(ActionEvent event)
       {
         ImageList images = new ImageList();
         String desc = ((ImageIcon)((JButton)event.getSource()).getIcon()).getDescription();
-        if (desc.equals(images.northArrow.getDescription()))
-          curPlayer.move(0, curPlayer.curRoom.move("north"), curPlayer.curRoom.move("north").panel.getLocation());
-        else if (desc.equals(images.eastArrow.getDescription()))
-          curPlayer.move(1, curPlayer.curRoom.move("east"), curPlayer.curRoom.move("east").panel.getLocation());
-        else if (desc.equals(images.southArrow.getDescription()))
-          curPlayer.move(2, curPlayer.curRoom.move("south"), curPlayer.curRoom.move("south").panel.getLocation());
-        else if (desc.equals(images.westArrow.getDescription()))
-          curPlayer.move(3, curPlayer.curRoom.move("west"), curPlayer.curRoom.move("west").panel.getLocation());
-        
+        if (!fireMode)
+        {
+          if (desc.equals(images.northArrow.getDescription()))
+            curPlayer.move(0, curPlayer.curRoom.move("north"), curPlayer.curRoom.move("north").panel.getLocation());
+          else if (desc.equals(images.eastArrow.getDescription()))
+            curPlayer.move(1, curPlayer.curRoom.move("east"), curPlayer.curRoom.move("east").panel.getLocation());
+          else if (desc.equals(images.southArrow.getDescription()))
+            curPlayer.move(2, curPlayer.curRoom.move("south"), curPlayer.curRoom.move("south").panel.getLocation());
+          else if (desc.equals(images.westArrow.getDescription()))
+            curPlayer.move(3, curPlayer.curRoom.move("west"), curPlayer.curRoom.move("west").panel.getLocation());
+        }
+        else 
+        {
+          Room shootRoom = null;
+          if (desc.equals(images.northArrow.getDescription()))
+          {
+            curPlayer.shootArrow();
+            shootRoom = curPlayer.curRoom.move("north");
+            if (shootRoom != null && shootRoom.wumpus != null)
+              new GameOver(curPlayer.score, curPlayer.name() + " shot the Wumpus!");
+          }  
+          else if (desc.equals(images.eastArrow.getDescription()))
+          {
+            curPlayer.shootArrow();
+            shootRoom = curPlayer.curRoom.move("east");
+            if (shootRoom != null && shootRoom.wumpus != null)
+              new GameOver(curPlayer.score, curPlayer.name() + " shot the Wumpus!");
+          } 
+          else if (desc.equals(images.southArrow.getDescription()))
+          {
+            curPlayer.shootArrow();
+            shootRoom = curPlayer.curRoom.move("south");
+            if (shootRoom != null && shootRoom.wumpus != null)
+              new GameOver(curPlayer.score, curPlayer.name() + " shot the Wumpus!");
+          }
+          else if (desc.equals(images.westArrow.getDescription()))
+          {
+            curPlayer.shootArrow();
+            shootRoom = curPlayer.curRoom.move("west");
+            if (shootRoom != null && shootRoom.wumpus != null)
+              new GameOver(curPlayer.score, curPlayer.name() + " shot the Wumpus!");
+          }
+        }
+        step();
+      }
+    }
+    
+    public class ModeListener implements ActionListener
+    {
+      public void actionPerformed(ActionEvent event)
+      {
+        fireMode = !fireMode;
         step();
       }
     }
