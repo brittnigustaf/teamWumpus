@@ -83,6 +83,16 @@ public class Dwarf {
       init(inList);
     }
     
+    Dwarf(Player inList[], String mapString){
+        //EFF: connects the file
+        
+        col = 8;
+        row = 8;
+        inLine =  mapString;
+
+        init(inList);
+      }
+    
     void init(Player inList[]){
       //EFF: builds the map
       

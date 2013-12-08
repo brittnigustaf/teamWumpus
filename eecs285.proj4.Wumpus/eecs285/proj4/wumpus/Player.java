@@ -52,7 +52,7 @@ public class Player
 	  
 	  curRoom = inRoom; 
     if (playerNum == 1)
-      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.RED));
     else
       curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
 	  //curImage = moveUp;

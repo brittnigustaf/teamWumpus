@@ -63,84 +63,6 @@ public class MapMaker {
         }
 
         
-        Random rando = new Random();
-        
-        int start1 = rando.nextInt(Integer.MAX_VALUE) % size;
-        
-        int start1x = start1 / x;
-        int start1y = start1 % x;
-        
-        map[start1x][start1y] += "1"; // set that square to be the 
-        							  //starting square for P1
-        //System.out.println(start1x + "," + start1y);
-        
-        rooms[start1x][start1y].P1Start = true;
-
-        
-        int start2;
-        
-        do{ //make sure start2 and start1 aren't the same square;
-            start2 = rando.nextInt(Integer.MAX_VALUE) % size;
-        }
-        while(start2 == start1);
-        
-        int start2x = start2 / x;
-        int start2y = start2 % x;
-        
-        map[start2x][start2y] += "2"; // set that square to be the 
-         							  //starting square for P2
-        rooms[start2x][start2y].P2Start = true;
-     
-        int wumpusSquare;
-        do{ //make sure start2 and start1 aren't the same square;
-            wumpusSquare = rando.nextInt(Integer.MAX_VALUE) % size;
-        }
-        while(wumpusSquare == start2 || wumpusSquare == start1);
-        
-        int wumpusx = wumpusSquare / x;
-        int wumpusy = wumpusSquare % x;
-        
-        map[wumpusx][wumpusy] += "O";
-        map[wumpusx][wumpusy] += "W"; // set that square to be the 
-        							  //starting square for the wumpus
-        rooms[wumpusx][wumpusy].wumpusStart = true;
-        
-        Integer batSquares[] = new Integer[numBats];
-        int numFound = 0;
-        for(int i = 0; i < numBats; i++){
-	        do{ //make sure start2 and start1 aren't the same square;
-	            batSquares[numFound] = rando.nextInt(Integer.MAX_VALUE) % size;
-	        }
-	        while(batSquares[numFound] == start1 || 
-	        		batSquares[numFound] == start2);
-        
-	        int batx = batSquares[numFound] / x;
-	        int baty = batSquares[numFound] % x;
-	        
-	        numFound++;
-	        
-	        map[batx][baty] += "b"; // set that square to have bats
-	        rooms[batx][baty].isBat = true;
-        }
-        
-        Integer pitSquares[] = new Integer[numPits];
-        numFound = 0;
-        for(int i = 0; i < numPits; i++){
-	        do{ //make sure start2 and start1 aren't the same square;
-	            pitSquares[numFound] = rando.nextInt(Integer.MAX_VALUE) % size;
-	        }
-	        while(pitSquares[numFound] == start1 ||
-	        		pitSquares[numFound] == start2);
-        
-	        int pitx = pitSquares[numFound] / x;
-	        int pity = pitSquares[numFound] % x;
-	        
-	        numFound++;
-	        
-	        map[pitx][pity] += "P"; // set that square to have a pit
-	        rooms[pitx][pity].isPit = true;
-        }
-        
         String[][] mapAttempt = new String[map.length][];
         littleRoom[][] roomAttempt = new littleRoom[map.length][];
         do{
@@ -149,10 +71,20 @@ public class MapMaker {
                 roomAttempt[i] = rooms[i].clone();
 
             }
-            generateMap(mapAttempt,roomAttempt);
-            printMap(mapAttempt, roomAttempt);
+            generateMap(mapAttempt,roomAttempt, numBats, numPits);
+            //printMap(mapAttempt, roomAttempt);
         }
         while(!isPath(mapAttempt, roomAttempt));
+        
+        Codex codex = new Codex();
+        /*for(int i = 0; i < mapAttempt.length; i++){
+            for(int j = 0; j < mapAttempt[0].length; j++){
+                mapAttempt[i][j].replaceAll("L", "LP");
+                if(roomAttempt[i][j].type.equals(roomTypes.EMPTY)){
+                    roomAttempt[i][j].isPit = true;
+                }
+            }
+        }*/
         
         map = mapAttempt;
         rooms = roomAttempt;
@@ -213,11 +145,12 @@ public class MapMaker {
     	return;
     }
 
-    private static void generateMap(String[][] map, littleRoom[][] rooms) {
+    private static void generateMap(String[][] map, littleRoom[][] rooms, int numBats, int numPits) {
     	//generates a random map for hunt the wumpus 
     	//given the dimensions of the map.
     	int x = map.length;
     	int y = map[0].length;
+    	int size = x * y;
     	Set<roomTypes> options = new HashSet<roomTypes>();
     	for (roomTypes tmp: roomTypes.values()){
     		options.add(tmp);
@@ -257,6 +190,84 @@ public class MapMaker {
     	right.add(roomTypes.T_UP);
     	right.add(roomTypes.T_DOWN);
     	right.add(roomTypes.T_RIGHT);
+    	
+    	Random rando = new Random();
+        
+        int start1 = rando.nextInt(Integer.MAX_VALUE) % size;
+        
+        int start1x = start1 / x;
+        int start1y = start1 % x;
+        
+        map[start1x][start1y] += "1"; // set that square to be the 
+                                      //starting square for P1
+        //System.out.println(start1x + "," + start1y);
+        
+        rooms[start1x][start1y].P1Start = true;
+
+        
+        int start2;
+        
+        do{ //make sure start2 and start1 aren't the same square;
+            start2 = rando.nextInt(Integer.MAX_VALUE) % size;
+        }
+        while(start2 == start1);
+        
+        int start2x = start2 / x;
+        int start2y = start2 % x;
+        
+        map[start2x][start2y] += "2"; // set that square to be the 
+                                      //starting square for P2
+        rooms[start2x][start2y].P2Start = true;
+     
+        int wumpusSquare;
+        do{ //make sure start2 and start1 aren't the same square;
+            wumpusSquare = rando.nextInt(Integer.MAX_VALUE) % size;
+        }
+        while(wumpusSquare == start2 || wumpusSquare == start1);
+        
+        int wumpusx = wumpusSquare / x;
+        int wumpusy = wumpusSquare % x;
+        
+        map[wumpusx][wumpusy] += "O";
+        map[wumpusx][wumpusy] += "W"; // set that square to be the 
+                                      //starting square for the wumpus
+        rooms[wumpusx][wumpusy].wumpusStart = true;
+        
+        Integer batSquares[] = new Integer[numBats];
+        int numFound = 0;
+        for(int i = 0; i < numBats; i++){
+            do{ //make sure start2 and start1 aren't the same square;
+                batSquares[numFound] = rando.nextInt(Integer.MAX_VALUE) % size;
+            }
+            while(batSquares[numFound] == start1 || 
+                    batSquares[numFound] == start2);
+        
+            int batx = batSquares[numFound] / x;
+            int baty = batSquares[numFound] % x;
+            
+            numFound++;
+            
+            map[batx][baty] += "b"; // set that square to have bats
+            rooms[batx][baty].isBat = true;
+        }
+        
+        Integer pitSquares[] = new Integer[numPits];
+        numFound = 0;
+        for(int i = 0; i < numPits; i++){
+            do{ //make sure start2 and start1 aren't the same square;
+                pitSquares[numFound] = rando.nextInt(Integer.MAX_VALUE) % size;
+            }
+            while(pitSquares[numFound] == start1 ||
+                    pitSquares[numFound] == start2);
+        
+            int pitx = pitSquares[numFound] / x;
+            int pity = pitSquares[numFound] % x;
+            
+            numFound++;
+            
+            map[pitx][pity] += "P"; // set that square to have a pit
+            rooms[pitx][pity].isPit = true;
+        }
     	
     	for(int i = 0; i < x; i ++){
     		for(int j = 0; j < y; j++){
@@ -330,7 +341,6 @@ public class MapMaker {
     				return;
     			}
     			else{
-	    			Random rando = new Random();
 	    			pick = rando.nextInt(Integer.MAX_VALUE) % roomOptions.size();
     			}
     			
@@ -399,9 +409,10 @@ public class MapMaker {
         			rooms[i][j].canGo.add(Direction.RIGHT);
 				break;
     			case EMPTY:
-    				map[i][j] += "L";
+    				map[i][j] += "PL";
     				break;
     			default:
+    			    map[i][j] += "b";
     				break;
     			
     					
