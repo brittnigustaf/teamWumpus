@@ -94,7 +94,7 @@ public class Room {
   return wumpus.callHint();
   }
   
-  ToggleBox<String> hintAtPlayer(){
+  String hintAtPlayer(){
     //EFF: returns a string ToggleBox with the hints from the room
     //     The problem is I don't know how the player will recieve this yet.
     
@@ -148,7 +148,7 @@ public class Room {
     for (int i=4; i<8; i++){
       knockknock = doors[i-4];
       if(knockknock != null){
-        if(knockknock.trap != null) events[i] = doors[i-4].checkStench();
+        if(knockknock.wumpus != null) events[i] = doors[i-4].checkStench();
         else {
           events[i] = "";
           mesh[i] = false;
@@ -184,9 +184,14 @@ public class Room {
       mesh[6] = false;
     }
     
-    ToggleBox<String> eventCall = new ToggleBox<String> (events, mesh);
+    String lines = "";
+    for(int i=0;i<8;i++){
+      if(mesh[i]){
+        lines = lines + events[i] + "\n";
+      }
+    }
     
-    return eventCall;
+    return lines;
     
   }
   

@@ -25,7 +25,7 @@ public class Dwarf {
     protected int numPlayers;
     protected int row;
     protected int col;
-    private boolean bug = true;
+    private boolean bug = false;
     ImageList images = new ImageList();
     
 
