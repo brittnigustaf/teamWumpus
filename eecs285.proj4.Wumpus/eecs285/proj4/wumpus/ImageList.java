@@ -128,11 +128,11 @@ public class ImageList {
     BufferedImage westArrow_img = null;
     
     try {
-      northArrow_img = ImageIO.read(new File("images/arrows/north_arrow.png"));//, "northImg"));
-      eastArrow_img = ImageIO.read(new File("images/arrows/east_arrow.png"));//, "eastImg"));
-      southArrow_img = ImageIO.read(new File("images/arrows/south_arrow.png"));//, "southImg"));
-      westArrow_img = ImageIO.read(new File("images/arrows/west_arrow.png"));//, "westImg"));
-    } 
+    northArrow_img = ImageIO.read(new File("images/arrows/north_arrow.png"));
+    eastArrow_img = ImageIO.read(new File("images/arrows/east_arrow.png"));
+    southArrow_img = ImageIO.read(new File("images/arrows/south_arrow.png"));
+    westArrow_img = ImageIO.read(new File("images/arrows/west_arrow.png"));
+  } 
     catch (IOException e) {
       e.printStackTrace();
     }
@@ -142,10 +142,10 @@ public class ImageList {
     BufferedImage southArrow_resized = resize(southArrow_img, 40, 40);
     BufferedImage westArrow_resized = resize(westArrow_img, 40, 40);
     
-    northArrow = new ImageIcon(northArrow_resized); 
-    eastArrow = new ImageIcon(eastArrow_resized);
-    southArrow = new ImageIcon(southArrow_resized);
-    westArrow = new ImageIcon(westArrow_resized);
+    northArrow = new ImageIcon(northArrow_resized, "northImg"); 
+    eastArrow = new ImageIcon(eastArrow_resized, "eastImg");
+    southArrow = new ImageIcon(southArrow_resized, "southImg");
+    westArrow = new ImageIcon(westArrow_resized, "westImg");
        
    }
   
@@ -253,10 +253,10 @@ public class ImageList {
     BufferedImage southArrow_resized = resize(southArrow_img, 40, 40);
     BufferedImage westArrow_resized = resize(westArrow_img, 40, 40);
     
-    northArrow = new ImageIcon(northArrow_resized); 
-    eastArrow = new ImageIcon(eastArrow_resized);
-    southArrow = new ImageIcon(southArrow_resized);
-    westArrow = new ImageIcon(westArrow_resized);
+    northArrow = new ImageIcon(northArrow_resized, "northImg"); 
+    eastArrow = new ImageIcon(eastArrow_resized, "eastImg");
+    southArrow = new ImageIcon(southArrow_resized, "southImg");
+    westArrow = new ImageIcon(westArrow_resized, "westImg");
       
   }
   
