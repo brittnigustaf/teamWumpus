@@ -98,7 +98,7 @@ public class MapMaker {
         	out+='\n';
         }
         int numMaps;
-        File mapDir = null;
+        /*File mapDir = null;
 		try {
 			mapDir = new File(getClass().getResource("maps/").toURI());
 			numMaps = mapDir.listFiles().length;
@@ -117,7 +117,7 @@ public class MapMaker {
 			// TODO Auto-generated catch block
 			System.out.println("Bad file write");
 			e.printStackTrace();
-		}
+		}*/
        System.out.print(out);
        return out; 
     }
