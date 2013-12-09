@@ -96,8 +96,8 @@ public class GameWindow extends JFrame {
       String mapString = mapMake.makeMap(8,8,1,2);
       
       
-      Urist = new Dwarf(players, mapString);
-      //Urist = new Dwarf(players);
+      //Urist = new Dwarf(players, mapString);
+      Urist = new Dwarf(players);
       Urist.readFile(new File("map0.txt").toPath());
       rowNum = Urist.row;
       colNum = Urist.col;
