@@ -71,7 +71,7 @@ public class Dwarf {
       
       col = 8;
       row = 8;
-      inLine =  "E,F,E,K,1F,L,2L,L,"
+      inLine =  "2E,F,E,K,1F,L,L,L,"
               + "B,J,A,A,I,E,K,F,"
               + "E,F,D,bB,C,H,C,D,"
               + "B,A,C,L,E,C,L,D,"

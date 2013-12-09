@@ -21,7 +21,7 @@ public class Player
 
 	public int numMoves;
 	
-	public Player ()
+	public Player (int num)
 	{   
     setImages();
     
@@ -35,7 +35,7 @@ public class Player
     location = new Point(0, 0);
     
     score = 0;
-    playerNum = 1;
+    playerNum = num;
     
 	}
 	
@@ -52,7 +52,7 @@ public class Player
 	  
 	  curRoom = inRoom; 
     if (playerNum == 1)
-      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.RED));
+      curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
     else
       curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
 	  //curImage = moveUp;
