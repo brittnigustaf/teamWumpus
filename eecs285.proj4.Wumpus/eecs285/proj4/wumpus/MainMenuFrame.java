@@ -8,12 +8,17 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class MainMenuFrame extends JFrame {
 
-
+    JPanel gameButtons;
     JButton playButton;
+    JButton onePlay;
+    JButton twoPlay;
+    
     JButton helpButton;
     JButton quitButton;
     JButton scoreButton;
     JLabel titleImage;
+    
+    int players;
     
     static BorderLayout mainLayout = new BorderLayout();
     static BorderLayout buttonLayout = new BorderLayout();
@@ -39,11 +44,21 @@ public class MainMenuFrame extends JFrame {
     }
     private void initialize(){
         //initialize the components I need
+        gameButtons = new JPanel(new BorderLayout());
         playButton = new JButton("Play");
+        onePlay = new JButton("One Player");
+        twoPlay = new JButton("Two Players");
+        
         helpButton = new JButton("Help");
         quitButton = new JButton("Quit");
         scoreButton = new JButton("High Scores");
         
+        gameButtons.add(playButton, BorderLayout.NORTH);
+        gameButtons.add(onePlay, BorderLayout.WEST);
+        gameButtons.add(twoPlay, BorderLayout.EAST);
+        players = 1;
+        onePlay.setEnabled(false);
+        twoPlay.setEnabled(true);
         
         //set up the layouts
 
@@ -77,6 +92,20 @@ public class MainMenuFrame extends JFrame {
                 play();
             }
         });
+        onePlay.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent evt) {
+                players = 1;
+                onePlay.setEnabled(false);
+                twoPlay.setEnabled(true);
+            }
+        });
+        twoPlay.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent evt) {
+                players = 2;
+                onePlay.setEnabled(true);
+                twoPlay.setEnabled(false);
+            }
+        });
         quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 System.exit(1);    
@@ -97,7 +126,7 @@ public class MainMenuFrame extends JFrame {
 
         
         //add components to their proper panes
-        buttonPane.add(playButton, BorderLayout.NORTH);
+        buttonPane.add(gameButtons, BorderLayout.NORTH);
         middleButtonPane.add(helpButton, BorderLayout.NORTH);
         middleButtonPane.add(scoreButton, BorderLayout.CENTER);
         buttonPane.add(middleButtonPane, BorderLayout.CENTER);
@@ -131,7 +160,7 @@ public class MainMenuFrame extends JFrame {
     };
     
     private void play(){
-        new GameWindow(scoreWindow);
+        new GameWindow(scoreWindow, players);
         setVisible(false);
     };
     

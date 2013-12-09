@@ -55,6 +55,8 @@ public class GameWindow extends JFrame {
     GridLayout optionLayout = new GridLayout(3,1);
     FlowLayout infoLayout = new FlowLayout();
     JTextArea hints;
+    
+    JLabel curPlayerName;
 
     
     JPanel optionPane = new JPanel(optionLayout);
@@ -83,14 +85,19 @@ public class GameWindow extends JFrame {
     private ModeListener modeListener;
     private int moveDir;
     
-    GameWindow(ScoreWindow inScore)
+    GameWindow(ScoreWindow inScore, int numPlayers)
     {
       //EFF: generates a default 8x8, 1-player game
       
       super("Hunt The Wumpus!");
       
-      players = new Player[1];
-      players[0] = new Player();
+      players = new Player[numPlayers];
+      
+      for(int i=0; i<players.length;i++){
+        players[i] = new Player(i+1);
+      }
+      
+      //players[0] = new Player();
       //players[1] = new Player();
       MapMaker mapMake = new MapMaker();
       String mapString = mapMake.makeMap(8,8,1,2);
@@ -200,7 +207,7 @@ public class GameWindow extends JFrame {
         
         JLabel playersTurnMessage = new JLabel("Current Players Turn: ");
         
-        JLabel curPlayerName = new JLabel(curPlayer.name());
+        curPlayerName = new JLabel(curPlayer.name());
         curPlayerName.setFont(new Font(curPlayerName.getName(), Font.PLAIN, 18));
         
         turnMessage.add(playersTurnMessage);
@@ -264,12 +271,13 @@ public class GameWindow extends JFrame {
         window.setVisible(true);
         for(Player pl: players){
         	pl.curRoom.reveal();
+        	if(pl == players[0]){
+        	  pl.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        	}
+        	else {
+        	  pl.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+        	}
         }
-        
-        if (curPlayer == players[0])
-          curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-        else
-          curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         validMoves();
        
     }
@@ -285,6 +293,7 @@ public class GameWindow extends JFrame {
       curPlayer.curRoom.reveal();
       nextPlayer();
       hint();
+      
       
       if (fireMode)
         changeMode.setText("Change to Movement Mode");
@@ -305,12 +314,14 @@ public class GameWindow extends JFrame {
     }
     
     void nextPlayer(){
-    	int cur = curPlayer.playerNum;
+    	int cur = curPlayer.playerNum - 1;
     	cur++;
-    	if(cur> players.length){
-    		cur =0;
+    	System.out.println(cur);
+    	if(cur>= players.length){
+    		cur = 0;
     	}
     	curPlayer = players[cur];
+    	curPlayerName.setText(curPlayer.name());
     }
     
     void event(){
