@@ -1,8 +1,0 @@
-E,G,K,K,F,E,G,F,
-D,L,D,B,OWA,C,E,1C,
-D,E,I,E,I,L,B,F,
-D,D,H,J,A,G,K,PI,
-H,C,D,L,H,G,I,2D,
-B,F,bB,F,H,F,B,C,
-L,B,K,J,I,B,F,L,
-L,L,B,G,J,G,C,L,
