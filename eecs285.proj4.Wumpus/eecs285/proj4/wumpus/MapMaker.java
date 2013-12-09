@@ -388,10 +388,10 @@ public class MapMaker {
         			rooms[i][j].canGo.add(Direction.RIGHT);
 				break;
     			case EMPTY:
-    				map[i][j] += "PL";
+    				map[i][j] += "PA";
     				break;
     			default:
-    			    map[i][j] += "PL";
+    			    map[i][j] += "PA";
     				break;
     			
     					

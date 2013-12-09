@@ -19,7 +19,7 @@ public class dummyGo {
   dummyGo(){
     window = new JFrame();
     board = new JPanel(new GridLayout(8,8));
-    player = new Player();
+    player = new Player(1);
     playerList = new Player[1];
     playerList[0] = player;
     Urist = new Dwarf(playerList);
@@ -41,7 +41,7 @@ public class dummyGo {
   dummyGo(String mapString){
       window = new JFrame();
       board = new JPanel(new GridLayout(8,8));
-      player = new Player();
+      player = new Player(1);
       playerList = new Player[1];
       playerList[0] = player;
       Urist = new Dwarf(playerList, mapString);

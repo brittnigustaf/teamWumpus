@@ -339,7 +339,9 @@ public class GameWindow extends JFrame {
     			String name = Integer.toString(curPlayer.playerNum);
     			nextPlayer();
     			int score = 5000 - curPlayer.numMoves*100;
-    			new GameOver(score, "Player " + name + " was eaten by the Wumpus");
+    			players = new Player[1];
+    			players[0] = curPlayer;
+    			//new GameOver(score, "Player " + name + " was eaten by the Wumpus");
     		}
     	}
     	else if(trip !=null){
@@ -381,7 +383,9 @@ public class GameWindow extends JFrame {
         			String name = Integer.toString(curPlayer.playerNum);
         			nextPlayer();
         			int score = 5000 - curPlayer.numMoves*100;
-        			new GameOver(score, "Player " + name + " fell into a pit");
+        			players = new Player[1];
+        			players[0] = curPlayer;
+        			//new GameOver(score, "Player " + name + " fell into a pit");
         		}
     		}
     	}
