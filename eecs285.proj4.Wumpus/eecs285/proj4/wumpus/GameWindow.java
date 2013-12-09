@@ -57,6 +57,7 @@ public class GameWindow extends JFrame {
     JTextArea hints;
     
     JLabel curPlayerName;
+    JLabel scoreLabel;
 
     
     JPanel optionPane = new JPanel(optionLayout);
@@ -183,7 +184,7 @@ public class GameWindow extends JFrame {
         
           //Player Score Info Panel
           String scoreMessage = "   " + player.name() + ":   " + Integer.toString(player.getScore());
-          JLabel scoreLabel = new JLabel(scoreMessage);
+          scoreLabel= new JLabel(scoreMessage);
           scoreLabel.setFont(new Font(scoreLabel.getName(), Font.PLAIN, 18));
           playerScore.add(scoreLabel);
           
@@ -288,13 +289,15 @@ public class GameWindow extends JFrame {
     }
     
     void step(){
+      String scoreMessage = "   " + curPlayer.name() + ":   " + Integer.toString(curPlayer.score);
+      playerScore.get(curPlayer.playerNum-1).setText(scoreMessage);
+      curPlayer.score -= 100;
       curPlayer.curRoom.reveal();
       event();
       curPlayer.curRoom.reveal();
       nextPlayer();
       hint();
-      
-      
+            
       if (fireMode)
         changeMode.setText("Change to Movement Mode");
       else
@@ -314,6 +317,8 @@ public class GameWindow extends JFrame {
     }
     
     void nextPlayer(){
+        String scoreMessage = "   " + curPlayer.name() + ":   " + Integer.toString(curPlayer.score);
+        playerScore.get(curPlayer.playerNum-1).setText(scoreMessage);
     	int cur = curPlayer.playerNum - 1;
     	cur++;
     	System.out.println(cur);
@@ -322,6 +327,9 @@ public class GameWindow extends JFrame {
     	}
     	curPlayer = players[cur];
     	curPlayerName.setText(curPlayer.name());
+        scoreMessage = "   " + curPlayer.name() + ":   " + Integer.toString(curPlayer.score);
+        playerScore.get(curPlayer.playerNum-1).setText(scoreMessage);
+    	
     }
     
     void event(){
@@ -333,12 +341,12 @@ public class GameWindow extends JFrame {
     	
     	if(wump != null){
     		if(players.length==1){
-    			new GameOver(0, "You were eaten by the Wumpus!");
+    			new GameOver(curPlayer.score, "You were eaten by the Wumpus!");
     		}
     		else {
     			String name = Integer.toString(curPlayer.playerNum);
     			nextPlayer();
-    			int score = 5000 - curPlayer.numMoves*100;
+    			int score = curPlayer.score;
     			players = new Player[1];
       			curPlayer.playerNum = 1;
     			players[0] = curPlayer;
@@ -350,8 +358,7 @@ public class GameWindow extends JFrame {
     			int score = curPlayer.score;
     			int moves = curPlayer.numMoves;
     			String name = Integer.toString(curPlayer.playerNum);
-    			score = score + ran.nextInt(5000) + 5000;
-    			score = score - moves*100;
+    			score = score + ran.nextInt(5000);
     			if(score<0) score = 0;
     			new GameOver(score, "Player "+ name +" found the gold!");                               
     		}
@@ -360,7 +367,7 @@ public class GameWindow extends JFrame {
     		  
     		  curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     		  
-    		  
+    		  	curPlayer.score -= 100;
     			int newCol = ran.nextInt(colNum -1);
     			int newRow = ran.nextInt(rowNum -1);
     			
@@ -378,12 +385,11 @@ public class GameWindow extends JFrame {
     		
     		if(trip instanceof Pitfall){
     			if(players.length==1){
-        			new GameOver(0, "You fell into a pit!");
+        			new GameOver(curPlayer.score, "You fell into a pit!");
         		}
         		else {
         			String name = Integer.toString(curPlayer.playerNum);
         			nextPlayer();
-        			int score = 5000 - curPlayer.numMoves*100;
         			players = new Player[1];
           			curPlayer.playerNum = 1;
         			players[0] = curPlayer;
@@ -440,8 +446,7 @@ public class GameWindow extends JFrame {
               int moves = curPlayer.numMoves;
               int score = curPlayer.score;
               Random ran = new Random();
-              score = score + ran.nextInt(5000) + 5000;
-              score = score - moves*100;
+              score = score + ran.nextInt(5000);
               if(score<0) score = 0;
               new GameOver(score, curPlayer.name() + " shot the Wumpus!");
             }
@@ -451,7 +456,6 @@ public class GameWindow extends JFrame {
     		else {
     			String name = Integer.toString(curPlayer.playerNum);
     			nextPlayer();
-    			int score = 5000 - curPlayer.numMoves*100;
     			players = new Player[1];
       			curPlayer.playerNum = 1;
     			players[0] = curPlayer;
@@ -466,8 +470,7 @@ public class GameWindow extends JFrame {
                 int moves = curPlayer.numMoves;
                 int score = curPlayer.score;
                 Random ran = new Random();
-                score = score + ran.nextInt(5000) + 5000;
-                score = score - moves*100;
+                score = score + ran.nextInt(5000);
                 if(score<0) score = 0;
                 new GameOver(score, curPlayer.name() + " shot the Wumpus!");
             }
@@ -493,8 +496,7 @@ public class GameWindow extends JFrame {
                 int moves = curPlayer.numMoves;
                 int score = curPlayer.score;
                 Random ran = new Random();
-                score = score + ran.nextInt(5000) + 5000;
-                score = score - moves*100;
+                score = score + ran.nextInt(5000);
                 if(score<0) score = 0;
                 new GameOver(score, curPlayer.name() + " shot the Wumpus!");
             }
@@ -519,8 +521,7 @@ public class GameWindow extends JFrame {
                 int moves = curPlayer.numMoves;
                 int score = curPlayer.score;
                 Random ran = new Random();
-                score = score + ran.nextInt(5000) + 5000;
-                score = score - moves*100;
+                score = score + ran.nextInt(5000);
                 if(score<0) score = 0;
                 new GameOver(score, curPlayer.name() + " shot the Wumpus!");
             }
@@ -543,6 +544,8 @@ public class GameWindow extends JFrame {
   			curPlayer.playerNum = 1;
   			players[0] = curPlayer;
           }
+          fireMode = false;
+          changeMode.setText("Change to Fire Mode");
         }
         step();
       }
@@ -553,7 +556,8 @@ public class GameWindow extends JFrame {
       public void actionPerformed(ActionEvent event)
       {
         fireMode = !fireMode;
-        step();
+        changeMode.setText("Change to Movement Mode");
+        //step();
       }
     }
   }

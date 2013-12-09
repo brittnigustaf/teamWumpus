@@ -34,7 +34,7 @@ public class Player
     //facingDir = directions.orient("north");
     location = new Point(0, 0);
     
-    score = 0;
+    score = 5000;
     playerNum = num;
     
 	}
@@ -47,7 +47,7 @@ public class Player
 	  arrow = true;
 	  //fireMode = false;
 	  
-    score = 0;
+    score = 5000;
     playerNum = inPlayerNum;
 	  
 	  curRoom = inRoom; 
