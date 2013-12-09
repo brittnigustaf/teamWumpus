@@ -24,6 +24,7 @@ public class ToggleBox < DataType > {
     
     box = inBox;
     toggles = inMesh;
+    length = box.length;
 
   }
   

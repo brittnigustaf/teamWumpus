@@ -73,7 +73,7 @@ public class Dwarf {
       row = 8;
       inLine =  "E,F,E,K,1F,L,2L,L,"
               + "B,J,A,A,I,E,K,F,"
-              + "E,F,D,B,C,H,C,D,"
+              + "E,F,D,bB,C,H,C,D,"
               + "B,A,C,L,E,C,L,D,"
               + "E,J,K,F,B,G,K,I,"
               + "H,K,J,A,G,OWK,J,C,"
