@@ -265,6 +265,11 @@ public class GameWindow extends JFrame {
         for(Player pl: players){
         	pl.curRoom.reveal();
         }
+        
+        if (curPlayer == players[0])
+          curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        else
+          curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         validMoves();
        
     }
@@ -277,6 +282,7 @@ public class GameWindow extends JFrame {
     void step(){
       curPlayer.curRoom.reveal();
       event();
+      curPlayer.curRoom.reveal();
       nextPlayer();
       hint();
       
@@ -337,11 +343,21 @@ public class GameWindow extends JFrame {
     		}
     		
     		if(trip instanceof Bats){
+    		  
+    		  curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    		  
+    		  
     			int newCol = ran.nextInt(colNum -1);
     			int newRow = ran.nextInt(rowNum -1);
     			
     			curPlayer.setRoom(roomMap[newRow][newCol]);
     			Point point = new Point(newRow, newCol);
+    			
+    			if (curPlayer == players[0])
+    	      curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+    	    else
+    	      curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+    			
     			curPlayer.setLocation(point);
     		}
     		
