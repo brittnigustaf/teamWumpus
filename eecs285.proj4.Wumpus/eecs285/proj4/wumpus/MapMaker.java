@@ -412,7 +412,7 @@ public class MapMaker {
     				map[i][j] += "PL";
     				break;
     			default:
-    			    map[i][j] += "b";
+    			    map[i][j] += "PL";
     				break;
     			
     					
