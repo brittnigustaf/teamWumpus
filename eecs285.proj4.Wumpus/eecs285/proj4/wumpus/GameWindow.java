@@ -359,6 +359,7 @@ public class GameWindow extends JFrame {
     	      curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
     			
     			curPlayer.setLocation(point);
+    			event();
     		}
     		
     		if(trip instanceof Pitfall){

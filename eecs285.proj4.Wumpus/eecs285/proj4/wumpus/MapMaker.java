@@ -97,27 +97,6 @@ public class MapMaker {
         	}
         	out+='\n';
         }
-        int numMaps;
-        /*File mapDir = null;
-		try {
-			mapDir = new File(getClass().getResource("maps/").toURI());
-			numMaps = mapDir.listFiles().length;
-		} catch (Exception e) {
-			numMaps = 0;
-		}
-        
-        
-        PrintWriter writer;
-		try {
-			writer = new PrintWriter("map" + numMaps, "UTF-8");
-			writer.println("The first line");
-		    writer.println("The second line");
-		    writer.close();
-		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Bad file write");
-			e.printStackTrace();
-		}*/
        System.out.print(out);
        return out; 
     }

@@ -126,7 +126,7 @@ public class GameOver {
     //EFF: extends MouseAdapter
     public void mouseClicked(MouseEvent e){
 
-		String url = "localhost/scores.php";
+		String url = "http://localhost/scores.php";
  
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);
@@ -143,10 +143,11 @@ public class GameOver {
 		}
 		String subText = "";
 		try {
-			client.execute(post);
+			System.out.println(post.toString());
+			HttpResponse response = client.execute(post);
 			subText = "Score Submitted!";
 		} catch (Exception e1) {
-			//e1.printStackTrace();
+			e1.printStackTrace();
 			subText = "Something went wrong... sorry!";
 
 		}
