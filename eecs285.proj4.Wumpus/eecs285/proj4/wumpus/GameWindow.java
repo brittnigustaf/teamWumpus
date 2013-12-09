@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -91,8 +92,13 @@ public class GameWindow extends JFrame {
       players = new Player[1];
       players[0] = new Player();
       //players[1] = new Player();
+      MapMaker mapMake = new MapMaker();
+      String mapString = mapMake.makeMap(8,8,1,2);
       
-      Urist = new Dwarf(players);
+      
+      Urist = new Dwarf(players, mapString);
+      //Urist = new Dwarf(players);
+      Urist.readFile(new File("map0.txt").toPath());
       rowNum = Urist.row;
       colNum = Urist.col;
       
