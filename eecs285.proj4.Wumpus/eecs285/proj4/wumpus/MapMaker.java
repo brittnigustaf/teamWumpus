@@ -66,13 +66,17 @@ public class MapMaker {
         String[][] mapAttempt = new String[map.length][];
         littleRoom[][] roomAttempt = new littleRoom[map.length][];
         do{
-            for(int i = 0; i < map.length; i++){
-            	mapAttempt[i] = map[i].clone();
-                roomAttempt[i] = rooms[i].clone();
-
-            }
-            generateMap(mapAttempt,roomAttempt, numBats, numPits);
-            //printMap(mapAttempt, roomAttempt);
+        	 mapAttempt = new String[x][y];
+        	 roomAttempt = new littleRoom[x][y];
+        	 
+             for(int i = 0; i < map.length; i++){
+            	 for(int j = 0; j < map[0].length; j++){
+	            	mapAttempt[i][j] = "";
+	                roomAttempt[i][j] = new littleRoom();
+            	 }
+             }
+             generateMap(mapAttempt,roomAttempt, numBats, numPits);
+             //printMap(mapAttempt, roomAttempt);
         }
         while(!isPath(mapAttempt, roomAttempt));
         
@@ -317,11 +321,9 @@ public class MapMaker {
     			//at random and assign it
     			int pick;
     			if(roomOptions.size() == 0){
-    				return;
+    				roomOptions.add(roomTypes.EMPTY);
     			}
-    			else{
-	    			pick = rando.nextInt(Integer.MAX_VALUE) % roomOptions.size();
-    			}
+	    		pick = rando.nextInt(Integer.MAX_VALUE) % roomOptions.size();
     			
     			roomTypes room_type = (roomTypes) roomOptions.toArray()[pick];
     			rooms[i][j].type = room_type;
@@ -431,13 +433,13 @@ public class MapMaker {
         
         haveVisited[p1x][p1y] = true;
         toVisit.add(p1Loc);
-        
+        System.out.println("checking maps");
         while(toVisit.size() > 0){
             Integer curRoom = toVisit.remove();
             Integer curX = curRoom / x;
             Integer curY = curRoom % x;
-            //System.out.println("At:" + curX + "," + curY);
             littleRoom currentRoom = rooms[curX][curY];
+            System.out.println("currentRoom.type for " + curX + "," +curY+ ": " + currentRoom.type);
             if(	!currentRoom.isPit && !currentRoom.isBat){
             	switch (currentRoom.type){ //add appropriate things to queue
 	                case CROSS:
@@ -589,8 +591,7 @@ public class MapMaker {
         for(int i = 0; i < x; i++){
         	for( int j = 0; j < y; j++){
         		littleRoom currentRoom = rooms[i][j];
-        		if(currentRoom.type != roomTypes.EMPTY 
-        				&& !currentRoom.isBat && !currentRoom.isPit){
+        		if(!currentRoom.isBat && !currentRoom.isPit){
         			if(!haveVisited[i][j]){
         				isGood = false;
         				//System.out.println(

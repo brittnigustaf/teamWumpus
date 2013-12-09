@@ -340,6 +340,7 @@ public class GameWindow extends JFrame {
     			nextPlayer();
     			int score = 5000 - curPlayer.numMoves*100;
     			players = new Player[1];
+      			curPlayer.playerNum = 1;
     			players[0] = curPlayer;
     			//new GameOver(score, "Player " + name + " was eaten by the Wumpus");
     		}
@@ -367,9 +368,9 @@ public class GameWindow extends JFrame {
     			Point point = new Point(newRow, newCol);
     			
     			if (curPlayer == players[0])
-    	      curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-    	    else
-    	      curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+	    	      curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+	    	    else
+	    	      curPlayer.curRoom.panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
     			
     			curPlayer.setLocation(point);
     			event();
@@ -384,6 +385,7 @@ public class GameWindow extends JFrame {
         			nextPlayer();
         			int score = 5000 - curPlayer.numMoves*100;
         			players = new Player[1];
+          			curPlayer.playerNum = 1;
         			players[0] = curPlayer;
         			//new GameOver(score, "Player " + name + " fell into a pit");
         		}
@@ -434,29 +436,112 @@ public class GameWindow extends JFrame {
           {
             curPlayer.shootArrow();
             shootRoom = curPlayer.curRoom.move("north");
-            if (shootRoom != null && shootRoom.wumpus != null)
-              new GameOver(curPlayer.score, curPlayer.name() + " shot the Wumpus!");
+            if (shootRoom != null && shootRoom.wumpus != null){
+              int moves = curPlayer.numMoves;
+              int score = curPlayer.score;
+              Random ran = new Random();
+              score = score + ran.nextInt(5000) + 5000;
+              score = score - moves*100;
+              if(score<0) score = 0;
+              new GameOver(score, curPlayer.name() + " shot the Wumpus!");
+            }
+            else if(players.length==1){
+    			new GameOver(0, "You missed the Wumpus!");
+    		}
+    		else {
+    			String name = Integer.toString(curPlayer.playerNum);
+    			nextPlayer();
+    			int score = 5000 - curPlayer.numMoves*100;
+    			players = new Player[1];
+      			curPlayer.playerNum = 1;
+    			players[0] = curPlayer;
+    			//new GameOver(score, "Player " + name + " fell into a pit");
+    		}
           }  
           else if (desc.equals(images.eastArrow.getDescription()))
           {
             curPlayer.shootArrow();
             shootRoom = curPlayer.curRoom.move("east");
-            if (shootRoom != null && shootRoom.wumpus != null)
-              new GameOver(curPlayer.score, curPlayer.name() + " shot the Wumpus!");
-          } 
+            if (shootRoom != null && shootRoom.wumpus != null){
+                int moves = curPlayer.numMoves;
+                int score = curPlayer.score;
+                Random ran = new Random();
+                score = score + ran.nextInt(5000) + 5000;
+                score = score - moves*100;
+                if(score<0) score = 0;
+                new GameOver(score, curPlayer.name() + " shot the Wumpus!");
+            }
+            else if(players.length==1){
+    			new GameOver(0, "You missed the Wumpus!");
+    		}
+    		else {
+    			String name = Integer.toString(curPlayer.playerNum);
+    			nextPlayer();
+    			int score = 5000 - curPlayer.numMoves*100;
+    			players = new Player[1];
+      			curPlayer.playerNum = 1;
+    			players[0] = curPlayer;
+    			//new GameOver(score, "Player " + name + " fell into a pit");
+    		}
+          }
+          
           else if (desc.equals(images.southArrow.getDescription()))
           {
             curPlayer.shootArrow();
             shootRoom = curPlayer.curRoom.move("south");
-            if (shootRoom != null && shootRoom.wumpus != null)
-              new GameOver(curPlayer.score, curPlayer.name() + " shot the Wumpus!");
+            if (shootRoom != null && shootRoom.wumpus != null){
+                int moves = curPlayer.numMoves;
+                int score = curPlayer.score;
+                Random ran = new Random();
+                score = score + ran.nextInt(5000) + 5000;
+                score = score - moves*100;
+                if(score<0) score = 0;
+                new GameOver(score, curPlayer.name() + " shot the Wumpus!");
+            }
+            else if(players.length==1){
+    			new GameOver(0, "You missed the Wumpus!");
+    		}
+    		else {
+    			String name = Integer.toString(curPlayer.playerNum);
+    			nextPlayer();
+    			int score = 5000 - curPlayer.numMoves*100;
+    			players = new Player[1];
+      			curPlayer.playerNum = 1;
+    			players[0] = curPlayer;
+    			//new GameOver(score, "Player " + name + " fell into a pit");
+    		}
           }
           else if (desc.equals(images.westArrow.getDescription()))
           {
             curPlayer.shootArrow();
             shootRoom = curPlayer.curRoom.move("west");
-            if (shootRoom != null && shootRoom.wumpus != null)
-              new GameOver(curPlayer.score, curPlayer.name() + " shot the Wumpus!");
+            if (shootRoom != null && shootRoom.wumpus != null){
+                int moves = curPlayer.numMoves;
+                int score = curPlayer.score;
+                Random ran = new Random();
+                score = score + ran.nextInt(5000) + 5000;
+                score = score - moves*100;
+                if(score<0) score = 0;
+                new GameOver(score, curPlayer.name() + " shot the Wumpus!");
+            }
+            else if(players.length==1){
+    			new GameOver(0, "You missed the Wumpus!");
+    		}
+    		else {
+    			String name = Integer.toString(curPlayer.playerNum);
+    			nextPlayer();
+    			int score = 5000 - curPlayer.numMoves*100;
+    			players = new Player[1];
+      			curPlayer.playerNum = 1;
+    			players[0] = curPlayer;
+    			//new GameOver(score, "Player " + name + " fell into a pit");
+    		}
+          }
+          else{
+        	nextPlayer();
+  			players = new Player[1];
+  			curPlayer.playerNum = 1;
+  			players[0] = curPlayer;
           }
         }
         step();

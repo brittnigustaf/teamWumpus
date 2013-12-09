@@ -69,7 +69,7 @@ public class GameOver {
 	Score = inScore;
     
 	announce = new JLabel(eventName);
-    question = new JLabel("Would you like to submit your score?");
+    question = new JLabel("Would you like to submit your score of " + Score + "?");
     
     nameLabel = new JLabel("Player Name");
     nameField = new JTextField();
